@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Precarga from '../components/landing/Precarga.astro'
+import Header from '../components/landing/Header.jsx'
+import Apertura from '../components/landing/Apertura.jsx'
+import Quienes from '../components/landing/Quienes.jsx'
+import Proceso from '../components/landing/Proceso.jsx'
+import Planes from '../components/landing/Planes.jsx'
+import Servicios from '../components/landing/Servicios.jsx'
+import Preguntas from '../components/landing/Preguntas.jsx'
+import Cierre from '../components/landing/Cierre.jsx'
+
+// Cada sección es una "isla" de React. Astro manda el HTML ya armado y solo
+// hidrata (le da vida con JS) cada isla cuando está por entrar en pantalla.
+const cerca = { rootMargin: '400px' }
+---
+
+<Layout title="Mergge — Tu web, pensada desde cero">
+  <Precarga />
+  <Header client:load />
+  <main>
+    <!-- La apertura se hidrata enseguida: su secuencia arranca al cerrar la precarga. -->
+    <Apertura client:load />
+    <Quienes client:visible={cerca} />
+    <Proceso client:visible={cerca} />
+    <Planes client:visible={cerca} />
+    <Servicios client:visible={cerca} />
+    <Preguntas client:visible={cerca} />
+    <Cierre client:visible={cerca} />
+  </main>
+</Layout>

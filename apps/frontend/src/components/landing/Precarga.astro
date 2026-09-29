@@ -1,0 +1,53 @@
+---
+// Pantalla de carga: crema, con el isotipo. Solo en la primera visita de la sesión.
+// Está en Astro (no en React) a propósito: tiene que verse ANTES de que cargue
+// cualquier componente, sin esperar la hidratación.
+---
+
+<div id="mg-precarga" aria-hidden="true">
+  <img src="/marca/isotipo.png" alt="" width="120" height="72" />
+</div>
+
+<script>
+  import { animate } from 'motion'
+
+  const precarga = document.getElementById('mg-precarga')
+  const isotipo = precarga?.querySelector('img')
+
+  function listo() {
+    ;(window as any).__merggeListo = true
+    window.dispatchEvent(new Event('mergge:listo'))
+    try {
+      sessionStorage.setItem('mg-precarga', '1')
+    } catch (e) {}
+  }
+
+  const yaVista = document.documentElement.dataset.precarga === 'vista'
+  const menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  async function correr() {
+    if (!precarga || !isotipo || yaVista || menosMovimiento) {
+      precarga?.remove()
+      listo()
+      return
+    }
+    // 1. Aparece el isotipo
+    await animate(isotipo, { opacity: [0, 1], scale: [0.86, 1] }, { duration: 0.5, ease: [0.16, 1, 0.3, 1] })
+    // 2. Pausa corta y se va
+    await animate(isotipo, { opacity: 0, scale: 0.94 }, { duration: 0.3, delay: 0.25 })
+    // 3. La cortina crema sube y descubre la apertura. Avisamos un poco antes
+    //    de que termine, así la secuencia de la apertura empieza "detrás" de la cortina.
+    const cortina = animate(
+      precarga,
+      { clipPath: ['inset(0 0 0% 0)', 'inset(0 0 100% 0)'] },
+      { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
+    )
+    setTimeout(listo, 250)
+    await cortina
+    precarga.remove()
+  }
+
+  // Esperamos a que carguen fuentes e imágenes, así el título no "salta".
+  if (document.readyState === 'complete') correr()
+  else window.addEventListener('load', correr, { once: true })
+</script>

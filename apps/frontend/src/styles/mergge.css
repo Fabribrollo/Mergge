@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+/* Tokens de marca — Tailwind v4 los toma de acá y genera las utilities solo
+   (bg-mg-azul, text-mg-marron, font-titulo, etc.), sin tailwind.config.js. */
+@theme {
+  --color-mg-azul: #3130e3;
+  --color-mg-naranja: #ff4500;
+  --color-mg-crema: #f1eee4;
+  --color-mg-marron: #310d00;
+  --color-mg-amarillo: #ffd307; /* el amarillo del logo: estrellitas del menú y detalles */
+  --color-mg-marron-suave: #5e4436;
+  --color-mg-marron-tenue: #8c7565;
+  --color-mg-linea: #d8d0be;
+  --color-mg-naranja-fondo: #fbe4db;
+  --color-mg-naranja-texto: #8a4426;
+  --color-mg-seleccion-fondo: #e4e4fa;
+
+  /* Tipografía vigente: títulos en Anton, todo lo demás en Poppins. */
+  --font-titulo: 'Anton', Impact, sans-serif;
+  --font-texto: 'Poppins', 'Century Gothic', sans-serif;
+}

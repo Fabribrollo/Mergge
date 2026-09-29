@@ -1,0 +1,103 @@
+/* ───────────────────────────────────────────────────────────────
+   Landing — estilos que no conviene escribir como utilities:
+   el fondo continuo, las luces, el grano y la pantalla de carga.
+   ─────────────────────────────────────────────────────────────── */
+
+html {
+  overflow-x: clip;
+  background: var(--color-mg-azul);
+  color: var(--color-mg-crema);
+  font-family: var(--font-texto);
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  margin: 0;
+  overflow-x: clip;
+}
+::selection {
+  background: var(--color-mg-naranja);
+  color: var(--color-mg-marron);
+}
+
+/* Lenis (scroll suave) — estilos mínimos que recomienda la librería. */
+html.lenis,
+html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ── Fondo continuo ──────────────────────────────────────────────
+   Truco de apilado: las secciones son `position: relative` pero SIN
+   z-index, transform ni opacity, así no crean su propio "contexto de
+   apilado". Entonces:
+     - el color de fondo de cada sección se pinta abajo de todo;
+     - las luces (.mg-luz, z-index 1) se pintan ENCIMA de los fondos
+       de todas las secciones — por eso pueden cruzar de una a otra;
+     - el contenido (.mg-contenido, z-index 2) queda arriba de las luces.
+   Regla: nunca animar la <section> en sí, siempre lo de adentro. */
+.mg-seccion {
+  position: relative;
+  /* Recorta lo que se sale de costado (órbitas, textos que entran deslizando)
+     sin recortar arriba/abajo, así las luces pueden cruzar de una sección a otra. */
+  overflow-x: clip;
+}
+.mg-luz {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 9999px;
+}
+/* Las luces que NO deben cruzar el corte van adentro de este recorte. */
+.mg-recorte {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.mg-contenido {
+  position: relative;
+  z-index: 2;
+}
+
+/* Grano: una sola capa fija para toda la página. Es estático a propósito
+   (animarlo cuesta rendimiento y no suma). */
+.mg-grano {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.2;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Pantalla de carga ─────────────────────────────────────────── */
+#mg-precarga {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--color-mg-crema);
+}
+#mg-precarga img {
+  width: 120px;
+  height: auto;
+  opacity: 0;
+}
+/* Si ya se vio en esta sesión (lo marca un script en el <head>), ni aparece. */
+html[data-precarga='vista'] #mg-precarga {
+  display: none;
+}
+
+/* Foco visible con el amarillo de la marca. */
+:where(a, button):focus-visible {
+  outline: 2px solid var(--color-mg-amarillo);
+  outline-offset: 3px;
+  border-radius: 999px;
+}
+
+/* Sin movimiento: todo queda quieto y visible. */
+@media (prefers-reduced-motion: reduce) {
+  #mg-precarga { display: none; }
+}

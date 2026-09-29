@@ -1,0 +1,25 @@
+---
+import '../styles/mergge.css'
+import FormularioContacto from '../components/formulario/FormularioContacto.jsx'
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contanos de tu proyecto — Mergge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Carga async: el widget se renderiza recién al llegar al último paso,
+         así que no hace falta bloquear nada acá. -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  </head>
+  <body>
+    <main>
+      <FormularioContacto client:load />
+    </main>
+  </body>
+</html>

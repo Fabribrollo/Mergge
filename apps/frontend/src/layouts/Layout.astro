@@ -1,0 +1,113 @@
+---
+import '../styles/mergge.css'
+import '../styles/landing.css'
+
+interface Props {
+  title: string
+  description?: string
+}
+
+const {
+  title,
+  description = 'Diseñamos y programamos páginas web a medida para emprendedores y pymes. Sin plantillas, sin atajos.',
+} = Astro.props
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#3130E3" />
+    <!-- Favicon cuadrado: el isotipo centrado con aire, así no se deforma -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/marca/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/marca/favicon-512.png" />
+    <link rel="apple-touch-icon" href="/marca/favicon-180.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Antes de pintar nada: si la pantalla de carga ya se vio en esta
+         sesión, la marcamos para que el CSS la oculte y no "parpadee". -->
+    <script is:inline>
+      try {
+        if (sessionStorage.getItem('mg-precarga')) {
+          document.documentElement.dataset.precarga = 'vista'
+          window.__merggeListo = true
+        }
+      } catch (e) {}
+    </script>
+
+    <!-- Sin JavaScript: todo lo que Motion arranca oculto se muestra igual. -->
+    <noscript>
+      <style>
+        .mg-anim { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+        #mg-precarga { display: none !important; }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <slot />
+    <div class="mg-grano" aria-hidden="true"></div>
+
+    <script>
+      // Scroll suave con Lenis, solo en compu y si no pidieron menos movimiento.
+      // En celular dejamos el scroll nativo: ya es suave y no hay que pelearlo.
+      import Lenis from 'lenis'
+
+      const menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      const tactil = window.matchMedia('(pointer: coarse)').matches
+      let lenis: Lenis | null = null
+
+      if (!menosMovimiento && !tactil) {
+        lenis = new Lenis({ duration: 1.1, smoothWheel: true })
+        const loop = (t: number) => {
+          lenis!.raf(t)
+          requestAnimationFrame(loop)
+        }
+        requestAnimationFrame(loop)
+        // La pantalla de carga frena el scroll hasta que termina.
+        if (!(window as any).__merggeListo) {
+          lenis.stop()
+          window.addEventListener('mergge:listo', () => lenis!.start(), { once: true })
+        }
+      }
+
+      // Links del menú (#seccion): en vez de pegar la sección al borde de arriba,
+      // la dejamos centrada en la pantalla. Si la sección es más alta que la
+      // pantalla, vamos a su comienzo más el desplazamiento que diga data-ancla
+      // (sirve para saltear los degradés de arriba, por ejemplo en Contacto).
+      function destino(seccion: HTMLElement) {
+        const r = seccion.getBoundingClientRect()
+        const arriba = r.top + window.scrollY
+        const alto = window.innerHeight
+        if (r.height <= alto) return arriba - (alto - r.height) / 2
+        return arriba + Number(seccion.dataset.ancla || 0)
+      }
+
+      document.addEventListener(
+        'click',
+        (e) => {
+          const link = (e.target as HTMLElement).closest?.('a[href^="#"]') as HTMLAnchorElement | null
+          if (!link) return
+          const seccion = document.querySelector(link.getAttribute('href')!) as HTMLElement | null
+          if (!seccion) return
+          e.preventDefault()
+          history.replaceState(null, '', link.getAttribute('href'))
+          // Un respiro para que el menú de celular se cierre (libera el scroll) antes de movernos.
+          setTimeout(() => {
+            const y = Math.max(0, destino(seccion))
+            if (lenis) lenis.scrollTo(y, { duration: 1.2 })
+            else window.scrollTo({ top: y, behavior: menosMovimiento ? 'auto' : 'smooth' })
+          }, 60)
+        },
+        true,
+      )
+    </script>
+  </body>
+</html>

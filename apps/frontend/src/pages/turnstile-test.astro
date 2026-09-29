@@ -1,0 +1,53 @@
+---
+// Página de prueba, solo para validar la integración de Turnstile de punta a punta.
+// Corré `pnpm dev` acá y en apps/backend, y entrá a /turnstile-test.
+const apiUrl = 'http://localhost:8787'
+const siteKey = '0x4AAAAAAExqTeIfArgMtQmg'
+---
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Test Turnstile — Mergge</title>
+		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+	</head>
+	<body style="font-family: sans-serif; max-width: 480px; margin: 60px auto; padding: 0 20px;">
+		<h1>Probar Turnstile</h1>
+		<p>Resolvé el widget y mandá el form. La verificación real pasa en <code>apps/backend</code>, no acá.</p>
+		<form id="form">
+			<div class="cf-turnstile" data-sitekey={siteKey}></div>
+			<button type="submit" style="margin-top: 16px;">Enviar</button>
+		</form>
+		<p id="resultado"></p>
+
+		<script define:vars={{ apiUrl }}>
+			document.getElementById('form').addEventListener('submit', async (e) => {
+				e.preventDefault();
+				const token = document.querySelector('[name="cf-turnstile-response"]')?.value;
+				const resultado = document.getElementById('resultado');
+
+				if (!token) {
+					resultado.textContent = '❌ Todavía no resolviste el widget.';
+					return;
+				}
+
+				resultado.textContent = 'Verificando contra el backend...';
+
+				try {
+					const res = await fetch(`${apiUrl}/verify-turnstile`, {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({ token }),
+					});
+					const data = await res.json();
+					resultado.textContent = data.success
+						? '✅ El backend confirmó el token contra Cloudflare.'
+						: `❌ Rechazado: ${data.error}`;
+					if (!data.success) window.turnstile?.reset();
+				} catch (err) {
+					resultado.textContent = '❌ No se pudo conectar con el backend. ¿Está corriendo wrangler dev?';
+				}
+			});
+		</script>
+	</body>
+</html>
