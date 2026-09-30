@@ -4,7 +4,6 @@ import Estrella from './ui/Estrella.jsx'
 import { dur, ease, resorte, stagger } from './ui/movimiento.js'
 
 const LINKS = [
-  { texto: 'Quiénes somos', href: '#quienes' },
   { texto: 'Cómo trabajamos', href: '#proceso' },
   { texto: 'Planes', href: '#planes' },
   { texto: 'Diseño', href: '#diseno' },
@@ -91,7 +90,9 @@ export default function Header() {
                   <a
                     href={link.href}
                     onMouseEnter={() => setSobre(i)}
-                    className="text-base font-medium tracking-[0.01em] text-mg-crema transition-opacity hover:opacity-70"
+                    // Subrayado amarillo que se dibuja de izquierda a derecha al entrar
+                    // y se va hacia la derecha al salir (cambia el origen del scale).
+                    className="relative py-1.5 text-base font-medium tracking-[0.01em] text-mg-crema after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-right after:scale-x-0 after:bg-mg-amarillo after:transition-transform after:duration-[450ms] after:ease-[cubic-bezier(0.16,1,0.3,1)] after:content-[''] hover:after:origin-left hover:after:scale-x-100 focus-visible:after:origin-left focus-visible:after:scale-x-100"
                   >
                     {link.texto}
                   </a>

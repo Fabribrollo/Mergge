@@ -5,6 +5,7 @@ import Orbita from './ui/Orbita.jsx'
 import { Revelar } from './ui/Revelar.jsx'
 import { alAparecer, dur, ease, stagger } from './ui/movimiento.js'
 import useEsCompu from './ui/useEsCompu.js'
+import { SITIO } from '../../datos/sitio.js'
 
 const PALABRA = 'Hablemos'
 
@@ -110,8 +111,8 @@ export default function Cierre() {
 
           <div className="mt-9 flex flex-col gap-3.5 md:mt-8 md:flex-row md:gap-3.5">
             {[
-              { href: 'https://wa.me/[NUMERO]', texto: 'Escribinos por WhatsApp', icono: Icono.whatsapp, oscuro: true },
-              { href: 'mailto:hola@mergge.com.ar', texto: 'hola@mergge.com.ar', icono: Icono.mail },
+              { href: SITIO.whatsapp, texto: 'Escribinos por WhatsApp', icono: Icono.whatsapp, oscuro: true },
+              { href: `mailto:${SITIO.email}`, texto: SITIO.email, icono: Icono.mail },
               { href: 'https://instagram.com/merggestudio', texto: '@merggestudio', icono: Icono.instagram },
             ].map((b, i) => (
               <motion.a
@@ -149,11 +150,37 @@ export default function Cierre() {
           <footer className="-mx-[22px] mt-24 border-t border-mg-marron/25 px-[22px] pb-10 pt-8 md:-mx-[48px] md:mt-[130px] md:px-[50px] md:py-6">
             <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between md:gap-6">
               <img src="/marca/logo-marron.png" alt="Mergge Studio" className="h-5 w-auto" width="133" height="20" />
-              <span className="text-[12.5px] text-mg-marron/80 md:text-sm">© 2026 Mergge Studio</span>
+              {/* Teléfono, email y ciudad escritos como texto (no solo dentro de un link),
+                  iguales a Google Business: que coincidan en todos lados suma confianza. */}
+              <div className="flex flex-col gap-1 text-[12.5px] text-mg-marron/80 md:items-end md:gap-1.5 md:text-sm">
+                {/* En celular los links tienen 28px de alto: el mínimo cómodo para tocarlos con el dedo */}
+                <p className="flex flex-col items-start md:flex-row md:items-center md:gap-0 [&>a]:py-1 md:[&>a]:py-0">
+                  <a href={SITIO.whatsapp} target="_blank" rel="noopener noreferrer" className="hover:text-mg-marron">
+                    {SITIO.telefono}
+                  </a>
+                  <Separador />
+                  <a href={`mailto:${SITIO.email}`} className="hover:text-mg-marron">
+                    {SITIO.email}
+                  </a>
+                </p>
+                <p className="flex flex-col gap-1 md:flex-row md:items-center md:gap-0">
+                  <span>Diseño y desarrollo web en {SITIO.ciudad}, Argentina</span>
+                  <Separador />
+                  <span>© 2026 {SITIO.nombre}</span>
+                </p>
+              </div>
             </div>
           </footer>
         </div>
       </section>
     </MotionConfig>
+  )
+}
+
+function Separador() {
+  return (
+    <span className="mx-3 hidden h-2.5 w-2.5 md:block" aria-hidden="true">
+      <Estrella color="#310D00" className="h-full w-full opacity-60" />
+    </span>
   )
 }

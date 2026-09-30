@@ -105,7 +105,7 @@ export default function Planes() {
               className="font-titulo text-[21vw] uppercase leading-[0.86] tracking-[-0.01em] text-mg-marron md:text-[min(9.7vw,140px)] [--contorno:#310D00] [--trazo:1.8px] md:[--trazo:2.4px]"
               lineas={[{ texto: 'Nuestros' }, { texto: 'planes', contorno: true }]}
             />
-            <Revelar as="p" className="max-w-[380px] text-[17px] leading-[1.5] text-mg-marron md:mt-4 md:text-right md:text-lg">
+            <Revelar as="p" className="max-w-[380px] text-[17px] leading-[1.5] text-mg-marron [text-wrap:balance] md:mt-4 md:max-w-[400px] md:text-right md:text-lg">
               Tres formas de empezar. Los valores están en dólares y dependen del alcance final. Si lo tuyo no entra en ninguno, lo&nbsp;vemos.
             </Revelar>
           </div>
@@ -140,7 +140,7 @@ function Tarjeta({ plan }) {
       whileHover={{ y: -6 }}
       transition={{ duration: dur.media, ease: ease.marca }}
     >
-      <p className={`text-[11.5px] font-semibold uppercase tracking-[0.16em] ${plan.suave}`}>{plan.etiqueta}</p>
+      <p className={`text-[13px] font-semibold tracking-[0.01em] ${plan.suave}`}>{plan.etiqueta}</p>
       <h3 className={`mt-3.5 font-titulo uppercase leading-[0.95] ${plan.destacado ? 'text-[52px] md:text-[60px]' : 'text-[46px] md:text-[52px]'}`}>
         {plan.nombre}
       </h3>
@@ -148,7 +148,7 @@ function Tarjeta({ plan }) {
 
       <div className="mt-7 flex items-end gap-2">
         <span className="whitespace-pre-line pb-[0.35em] font-titulo text-xl uppercase leading-[0.9]">{plan.antes}</span>
-        <span className={`font-titulo leading-[0.85] ${plan.destacado ? 'text-[72px] md:text-[84px]' : 'text-[62px] md:text-[70px]'}`}>{plan.precio}</span>
+        <span className={`whitespace-nowrap font-titulo leading-[0.85] ${plan.destacado ? 'text-[min(17vw,72px)] md:text-[84px]' : 'text-[62px] md:text-[70px]'}`}>{plan.precio}</span>
       </div>
       <p className={`mt-3 flex items-center gap-2 text-[13px] font-semibold ${plan.suave}`}>
         <Reloj /> {plan.tiempo}

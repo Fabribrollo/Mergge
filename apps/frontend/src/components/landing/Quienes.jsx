@@ -12,7 +12,12 @@ export default function Quienes() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <section id="quienes" className="mg-seccion">
+      <section id="quienes" className="mg-seccion" aria-labelledby="quienes-titulo">
+        {/* Título de la sección para Google y lectores de pantalla. Las palabras
+            grandes DISEÑO / DESARROLLO son la versión visual del mismo título. */}
+        <h2 id="quienes-titulo" className="sr-only">
+          Quiénes somos: diseño y desarrollo web en un mismo equipo
+        </h2>
         {/* Mitad naranja. Arriba, un degradé corto desde el azul de la apertura. */}
         <div
           data-tono="255,69,0"
@@ -31,12 +36,13 @@ export default function Quienes() {
               as="p"
               className="text-[22px] font-semibold leading-tight text-mg-marron md:mb-[4.5vw] md:text-right md:text-[clamp(24px,2.4vw,34px)]"
             >
-              Dos disciplinas
+              Dos disciplinas que trabajan
               <br />
-              Un mismo proceso
+              desde el mismo&nbsp;lugar
             </Revelar>
 
-            <motion.h2
+            <motion.p
+              aria-hidden="true"
               className="mg-anim font-titulo text-[30.5vw] uppercase leading-[0.86] tracking-[-0.01em] text-mg-marron md:text-[min(16vw,230px)]"
               initial={{ opacity: 0, x: -recorrido }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -44,7 +50,7 @@ export default function Quienes() {
               transition={{ duration: dur.lenta, ease: ease.marca }}
             >
               Diseño
-            </motion.h2>
+            </motion.p>
           </div>
         </div>
 
@@ -79,8 +85,8 @@ export default function Quienes() {
               retraso={0.15}
               className="mt-auto max-w-[560px] pt-10 text-[17px] leading-[1.55] text-mg-crema md:ml-auto md:mt-20 md:pt-0 md:text-xl md:leading-normal"
             >
-              Mergge existe para transformar ideas en experiencias digitales que conectan marcas con personas. Somos de
-              Mar del Plata y trabajamos con gente de todo&nbsp;el&nbsp;país.
+              Mergge existe para transformar ideas en experiencias digitales que conectan marcas
+              con&nbsp;personas.
             </Revelar>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AnimatePresence, motion, MotionConfig } from 'motion/react'
+import { motion, MotionConfig } from 'motion/react'
 import Estrella from './ui/Estrella.jsx'
 import Orbita from './ui/Orbita.jsx'
 import Boton from './ui/Boton.jsx'
@@ -94,30 +94,27 @@ export default function Servicios() {
                       </span>
                     </button>
 
-                    <AnimatePresence initial={false}>
-                      {activo && (
-                        <motion.div
-                          key="desc"
-                          className="overflow-hidden"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.4, ease: ease.marca }}
+                    {/* La descripción está siempre en el HTML (para Google y las IAs);
+                        la cerrada queda con alto 0 en vez de salir del DOM. */}
+                    <motion.div
+                      className="overflow-hidden"
+                      initial={false}
+                      animate={activo ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: ease.marca }}
+                      aria-hidden={!activo}
+                    >
+                      <div className="flex items-start gap-3 pb-4 pl-1 pt-2 md:w-[640px] md:pb-[18px] md:pt-3">
+                        <motion.span
+                          className="mt-[5px] block h-[14px] w-[14px] shrink-0 md:mt-[7px] md:h-[15px] md:w-[15px]"
+                          initial={false}
+                          animate={{ rotate: activo ? 0 : -90 }}
+                          transition={resorte}
                         >
-                          <div className="flex items-start gap-3 pb-4 pl-1 pt-2 md:w-[640px] md:pb-[18px] md:pt-3">
-                            <motion.span
-                              className="mt-[5px] block h-[14px] w-[14px] shrink-0 md:mt-[7px] md:h-[15px] md:w-[15px]"
-                              initial={{ rotate: -90 }}
-                              animate={{ rotate: 0 }}
-                              transition={resorte}
-                            >
-                              <Estrella color="#FF4500" className="h-full w-full" />
-                            </motion.span>
-                            <p className="text-base leading-[1.5] text-mg-crema/90 md:text-xl">{s.desc}</p>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                          <Estrella color="#FF4500" className="h-full w-full" />
+                        </motion.span>
+                        <p className="text-base leading-[1.5] text-mg-crema/90 md:text-xl">{s.desc}</p>
+                      </div>
+                    </motion.div>
                   </motion.li>
                 )
               })}

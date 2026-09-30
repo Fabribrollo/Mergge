@@ -1,0 +1,14 @@
+{
+  "name": "Mergge Studio",
+  "short_name": "Mergge",
+  "description": "Estudio de diseño y desarrollo web en Argentina.",
+  "start_url": "/",
+  "display": "browser",
+  "lang": "es-AR",
+  "background_color": "#F1EEE4",
+  "theme_color": "#3130E3",
+  "icons": [
+    { "src": "/marca/favicon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/marca/favicon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

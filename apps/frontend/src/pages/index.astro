@@ -9,13 +9,14 @@ import Planes from '../components/landing/Planes.jsx'
 import Servicios from '../components/landing/Servicios.jsx'
 import Preguntas from '../components/landing/Preguntas.jsx'
 import Cierre from '../components/landing/Cierre.jsx'
+import { schemaHome } from '../datos/schema.js'
 
 // Cada sección es una "isla" de React. Astro manda el HTML ya armado y solo
 // hidrata (le da vida con JS) cada isla cuando está por entrar en pantalla.
 const cerca = { rootMargin: '400px' }
 ---
 
-<Layout title="Mergge — Tu web, pensada desde cero">
+<Layout title="Agencia de Diseño y Desarrollo Web en Argentina - Mergge" schema={schemaHome()}>
   <Precarga />
   <Header client:load />
   <main>

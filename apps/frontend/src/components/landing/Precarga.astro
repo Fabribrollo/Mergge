@@ -31,23 +31,24 @@
       listo()
       return
     }
-    // 1. Aparece el isotipo
-    await animate(isotipo, { opacity: [0, 1], scale: [0.86, 1] }, { duration: 0.5, ease: [0.16, 1, 0.3, 1] })
-    // 2. Pausa corta y se va
-    await animate(isotipo, { opacity: 0, scale: 0.94 }, { duration: 0.3, delay: 0.25 })
-    // 3. La cortina crema sube y descubre la apertura. Avisamos un poco antes
+    // Versión corta (menos de 1 s en total): el isotipo ya se ve desde el
+    // primer instante (sin fundido de entrada), una pausa breve y la cortina.
+    // 1. Pausa corta y el isotipo se va
+    await animate(isotipo, { opacity: 0, scale: 0.94 }, { duration: 0.25, delay: 0.3 })
+    // 2. La cortina crema sube y descubre la apertura. Avisamos un poco antes
     //    de que termine, así la secuencia de la apertura empieza "detrás" de la cortina.
     const cortina = animate(
       precarga,
       { clipPath: ['inset(0 0 0% 0)', 'inset(0 0 100% 0)'] },
-      { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
+      { duration: 0.55, ease: [0.76, 0, 0.24, 1] },
     )
-    setTimeout(listo, 250)
+    setTimeout(listo, 150)
     await cortina
     precarga.remove()
   }
 
-  // Esperamos a que carguen fuentes e imágenes, así el título no "salta".
-  if (document.readyState === 'complete') correr()
-  else window.addEventListener('load', correr, { once: true })
+  // Esperamos a las fuentes (así el título no "salta"), pero como mucho 700 ms:
+  // ya no esperamos a que cargue todo el sitio (imágenes incluidas).
+  const fuentes = document.fonts ? document.fonts.ready : Promise.resolve()
+  Promise.race([fuentes, new Promise((r) => setTimeout(r, 700))]).then(correr)
 </script>

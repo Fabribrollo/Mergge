@@ -11,19 +11,27 @@ import useEsCompu from './ui/useEsCompu.js'
 // título que sube → órbita que se dibuja → estrella que cae sobre la órbita.
 export default function Apertura() {
   const [listo, setListo] = useState(false)
+  // En celular, el antetítulo, el título, el texto y el botón entran con una
+  // animación de CSS (ver landing.css). Si además los animara Motion, se verían
+  // entrar dos veces: por eso ahí Motion no los toca y solo anima la órbita.
+  const [textoConMotion, setTextoConMotion] = useState(false)
   const esCompu = useEsCompu()
   const ref = useRef(null)
 
-  useEffect(() => alListo(() => setListo(true)), [])
+  useEffect(() => {
+    setTextoConMotion(!window.matchMedia('(max-width: 767px)').matches)
+    return alListo(() => setListo(true))
+  }, [])
+  const entraTexto = listo && textoConMotion
 
-  // Parallax suave del título al scrollear (solo en compu).
+  // Al scrollear, la órbita gira apenas (solo en compu). Antes el título también
+  // bajaba con un parallax, pero terminaba tapando la sección siguiente.
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const tituloY = useTransform(scrollYProgress, [0, 1], [0, esCompu ? 140 : 0])
   const orbitaGiro = useTransform(scrollYProgress, [0, 1], [0, esCompu ? 4 : 0])
 
   const entrada = (retraso) => ({
     initial: { opacity: 0, y: 24 },
-    animate: listo ? { opacity: 1, y: 0 } : undefined,
+    animate: entraTexto ? { opacity: 1, y: 0 } : undefined,
     transition: { duration: dur.media, ease: ease.marca, delay: retraso },
   })
 
@@ -52,7 +60,7 @@ export default function Apertura() {
         </div>
 
         <div className="mg-contenido px-[22px] pb-24 pt-[104px] md:px-[50px] md:pb-40 md:pt-[170px]">
-          <motion.div className="relative" style={{ y: tituloY }}>
+          <div className="relative">
             {/* Órbita naranja con su estrella: una para celular y otra para compu
                 (cambia la proporción). La estrella va calculada SOBRE la elipse. */}
             <motion.div className="pointer-events-none absolute inset-0" style={{ rotate: orbitaGiro }} aria-hidden="true">
@@ -62,7 +70,7 @@ export default function Apertura() {
                 rotacion={-12}
                 grosor={3}
                 estrella={{ angulo: -62, tamano: 44, sombra: 'drop-shadow(0 8px 16px rgba(20,18,140,0.5))' }}
-                className="absolute left-[-8%] top-[-4%] h-[82%] w-[118%] md:hidden"
+                className="absolute left-[-8%] top-[15%] h-[76%] w-[118%] md:hidden"
               />
               <Orbita
                 activa={listo}
@@ -76,29 +84,26 @@ export default function Apertura() {
 
             <TituloEnLineas
               as="h1"
-              activo={listo}
+              activo={entraTexto}
               className="relative font-titulo text-[20vw] uppercase leading-[0.88] tracking-[-0.01em] text-mg-crema md:text-[clamp(96px,10.8vw,156px)] md:leading-[0.86] [--trazo:1.8px] md:[--trazo:2.5px]"
               lineas={[{ texto: 'Tu web' }, { texto: 'pensada' }, { texto: 'desde cero', contorno: true }]}
+              antetitulo="Estudio de diseño y desarrollo web"
+              claseAntetitulo="mb-4 font-texto text-[15px] font-semibold normal-case leading-snug tracking-[0.01em] text-mg-crema/85 md:mb-6 md:text-xl"
             />
-          </motion.div>
+          </div>
 
           <motion.p
             className="mg-anim mt-8 max-w-[620px] text-[17px] leading-[1.55] text-mg-crema/90 md:mt-9 md:text-[21px] md:leading-normal"
             {...entrada(0.6)}
           >
             Diseñamos y programamos páginas web a&nbsp;medida
-            <br className="hidden md:block" /> para emprendedores y pymes. Sin plantillas, sin&nbsp;atajos.
+            <br className="hidden md:block" /> para emprendedores y&nbsp;pymes.
           </motion.p>
 
           <div className="mt-8 flex flex-col gap-3 md:mt-9 md:flex-row md:gap-3.5">
-            <motion.div className="mg-anim" {...entrada(0.6 + stagger.items)}>
+            <motion.div className="mg-anim" style={{ '--d': '0.62s' }} {...entrada(0.6 + stagger.items)}>
               <Boton href="#contacto" className="w-full md:w-[210px]">
                 Hablemos
-              </Boton>
-            </motion.div>
-            <motion.div className="mg-anim" {...entrada(0.6 + stagger.items * 2)}>
-              <Boton href="/analisis" variante="contorno" className="w-full md:w-[270px]">
-                Analizá tu web gratis
               </Boton>
             </motion.div>
           </div>

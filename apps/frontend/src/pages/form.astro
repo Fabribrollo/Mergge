@@ -1,18 +1,41 @@
 ---
 import '../styles/mergge.css'
+import '@fontsource/anton/latin-400.css'
+import '@fontsource/poppins/latin-400.css'
+import '@fontsource/poppins/latin-500.css'
+import '@fontsource/poppins/latin-600.css'
+import '@fontsource/poppins/latin-700.css'
 import FormularioContacto from '../components/formulario/FormularioContacto.jsx'
+import { SITIO } from '../datos/sitio.js'
+
+// Esta página se manda por link a cada cliente (como un Google Form).
+// No tiene que aparecer en Google: lleva noindex y queda fuera del sitemap.
+// Igual tiene vista previa para cuando se comparte por WhatsApp.
+const titulo = 'Contanos de tu proyecto — Mergge Studio'
+const bajada = 'Un formulario corto para conocer tu negocio y lo que necesitás de tu web.'
+const imagenUrl = new URL(SITIO.imagenOg, Astro.site)
 ---
 
-<html lang="es">
+<html lang="es-AR">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Contanos de tu proyecto — Mergge</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <title>{titulo}</title>
+    <meta name="description" content={bajada} />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#3130E3" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/marca/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/marca/favicon-180.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITIO.nombre} />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={bajada} />
+    <meta property="og:image" content={imagenUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
     <!-- Carga async: el widget se renderiza recién al llegar al último paso,
          así que no hace falta bloquear nada acá. -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>

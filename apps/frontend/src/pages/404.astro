@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Boton from '../components/landing/ui/Boton.jsx'
+import Estrella from '../components/landing/ui/Estrella.jsx'
+
+// Página para links rotos. Lleva noindex y el servidor tiene que responderla
+// con código 404 (no 200), así Google no la guarda como una página más.
+---
+
+<Layout title="Página no encontrada - Mergge Studio" noindex>
+  <main
+    class="relative flex min-h-svh flex-col overflow-hidden bg-mg-azul px-[22px] pb-16 pt-8 text-mg-crema md:px-[50px] md:pt-10"
+    data-tono="49,48,227"
+  >
+    <a href="/" aria-label="Mergge Studio — inicio" class="relative z-[2] w-fit">
+      <img src="/marca/logo-crema.png" alt="Mergge Studio" class="h-[17px] w-auto md:h-[22px]" width="147" height="22" />
+    </a>
+
+    <div class="pointer-events-none absolute right-[-30vw] top-[18%] w-[80vw] opacity-40 md:right-[-8vw] md:top-[8%] md:w-[min(50vw,720px)]" aria-hidden="true">
+      <Estrella contorno color="#F1EEE4" className="h-auto w-full" />
+    </div>
+
+    <div class="relative z-[2] my-auto pt-16">
+      <p class="font-titulo text-[34vw] uppercase leading-[0.8] text-mg-naranja md:text-[min(22vw,300px)]">404</p>
+      <h1 class="mt-6 font-titulo text-[12vw] uppercase leading-[0.9] md:text-[min(7vw,100px)]">Esta página no existe</h1>
+      <p class="mt-6 max-w-[520px] text-[17px] leading-[1.55] text-mg-crema/90 md:text-xl">
+        Puede que el link esté mal escrito o que la página ya no esté. Desde el inicio encontrás todo lo que&nbsp;hacemos.
+      </p>
+      <div class="mt-9 flex flex-col gap-3 md:flex-row md:gap-3.5">
+        <Boton href="/" className="w-full md:w-[240px]">Ir al inicio</Boton>
+        <Boton href="/#contacto" variante="contorno" className="w-full md:w-[240px]">Hablemos</Boton>
+      </div>
+    </div>
+  </main>
+</Layout>

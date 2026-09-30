@@ -1,0 +1,9 @@
+# Mergge Studio · https://mergge.com.ar
+# Todos los buscadores y rastreadores de IA pueden leer el sitio,
+# incluidos los de entrenamiento de modelos (decisión tomada a propósito).
+# /form no se bloquea acá: tiene un noindex, y para leerlo Google tiene que poder entrar.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://mergge.com.ar/sitemap-index.xml

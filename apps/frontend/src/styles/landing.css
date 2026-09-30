@@ -83,7 +83,52 @@ html.lenis body { height: auto; }
 #mg-precarga img {
   width: 120px;
   height: auto;
-  opacity: 0;
+}
+/* En celular no hay pantalla de carga (también lo marca el script del <head>). */
+@media (max-width: 767px) {
+  #mg-precarga {
+    display: none;
+  }
+  /* La entrada de la apertura en celular es con CSS, no con JavaScript:
+     arranca apenas se pinta la página, sin esperar a que cargue React, así
+     el título (lo que Google mide como "contenido principal") llega rápido.
+     Las animaciones de CSS le ganan a los estilos que deja Motion en el HTML.
+     Mismo orden que en compu: antetítulo, líneas del título, texto y botón. */
+  #inicio .mg-anim {
+    animation: mg-aparecer 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0.5s) both;
+  }
+  #inicio .mg-antetitulo {
+    animation-delay: 0s;
+  }
+  #inicio .mg-linea {
+    animation: mg-subir-linea 0.9s cubic-bezier(0.22, 1, 0.36, 1) calc(0.1s + var(--i, 0) * 0.08s) both;
+  }
+}
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  #inicio .mg-anim,
+  #inicio .mg-linea {
+    animation: none;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+@keyframes mg-aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes mg-subir-linea {
+  from {
+    transform: translateY(130%);
+  }
+  to {
+    transform: none;
+  }
 }
 /* Si ya se vio en esta sesión (lo marca un script en el <head>), ni aparece. */
 html[data-precarga='vista'] #mg-precarga {

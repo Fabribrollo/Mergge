@@ -5,16 +5,12 @@ import Orbita from './ui/Orbita.jsx'
 import { Revelar, TituloEnLineas } from './ui/Revelar.jsx'
 import { resorte as resorteGeneral } from './ui/movimiento.js'
 import useEsCompu from './ui/useEsCompu.js'
+import { PREGUNTAS } from '../../datos/sitio.js'
 
-const PREGUNTAS = [
-  ['¿Cuánto cuesta una web?', 'Depende de lo que necesites. Después de la charla te pasamos un presupuesto cerrado, así sabés desde el principio cuánto vas a pagar.'],
-  ['¿Cómo se paga?', '50 % al empezar y 50 % al entregar. El proceso arranca cuando recibimos el primer pago y la información que necesitamos para empezar.'],
-  ['¿Cuánto tarda?', 'Entre 3 y 8 semanas, según lo que incluya tu web. La fecha exacta te la damos en la propuesta.'],
-  ['¿Qué tengo que tener listo?', 'Saber qué hace tu negocio y a quién le vende. Si ya tenés logo, textos y fotos, mejor; si te falta algo, lo vemos juntos en la charla.'],
-  ['¿Voy a poder cambiar cosas yo?', 'Sí, si lo necesitás. La armamos para que cambies textos y fotos desde un panel simple, y te enseñamos a usarlo.'],
-  ['¿Trabajan con gente de otras ciudades?', 'Sí. Somos de Mar del Plata y trabajamos con gente de todo el país. Todo el proceso se hace a distancia.'],
-  ['¿Usan plantillas?', 'No. Cada web se diseña y se programa desde cero para tu negocio, y la pensamos los dos juntos desde el primer boceto.'],
-]
+// Orden de las píldoras en celular (índices de PREGUNTAS): primero el precio y
+// después si pueden editar la web. En compu se respeta el orden original.
+const ORDEN_CELULAR = [0, 4, 1, 2, 3, 5, 6]
+
 const SALUDO = '¡Hola! Somos Delfina y Fabrizio. Elegí una pregunta y te contamos.'
 
 // Resortes propios de esta sección (ver guía: "nivel iMessage").
@@ -140,7 +136,8 @@ export default function Preguntas() {
                     type="button"
                     onClick={() => elegir(i)}
                     aria-pressed={sel === i}
-                    className={`relative h-[42px] shrink-0 whitespace-nowrap rounded-full px-[18px] text-sm font-semibold md:h-12 md:px-[22px] md:text-base ${
+                    style={{ '--orden': ORDEN_CELULAR.indexOf(i) }}
+                    className={`relative order-(--orden) h-[42px] shrink-0 md:order-none whitespace-nowrap rounded-full px-[18px] text-sm font-semibold md:h-12 md:px-[22px] md:text-base ${
                       sel === i ? 'text-mg-marron' : 'text-mg-crema'
                     }`}
                     whileTap={{ scale: 0.95 }}
@@ -157,6 +154,18 @@ export default function Preguntas() {
                 ))}
               </div>
             </Revelar>
+
+            {/* Todas las preguntas con su respuesta, en texto. No se ven en pantalla
+                (el chat las muestra de a una), pero quedan en el HTML: así las leen
+                Google, las IAs (que no ejecutan el chat) y los lectores de pantalla. */}
+            <dl className="sr-only">
+              {PREGUNTAS.map(([pregunta, respuesta]) => (
+                <div key={pregunta}>
+                  <dt>{pregunta}</dt>
+                  <dd>{respuesta}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
 
           {/* El chat */}

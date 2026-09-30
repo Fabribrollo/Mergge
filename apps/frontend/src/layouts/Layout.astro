@@ -1,42 +1,76 @@
 ---
 import '../styles/mergge.css'
 import '../styles/landing.css'
+// Fuentes servidas desde el propio sitio (antes venían de Google Fonts):
+// una conexión menos antes de pintar el texto. Solo el alfabeto latino
+// (incluye ñ y tildes) y solo los pesos que usamos.
+import '@fontsource/anton/latin-400.css'
+import '@fontsource/poppins/latin-400.css'
+import '@fontsource/poppins/latin-500.css'
+import '@fontsource/poppins/latin-600.css'
+import '@fontsource/poppins/latin-700.css'
+// Anton es la del título grande: la pedimos apenas arranca la página.
+import antonUrl from '@fontsource/anton/files/anton-latin-400-normal.woff2?url'
+import { SITIO } from '../datos/sitio.js'
 
 interface Props {
   title: string
   description?: string
+  /** true en páginas que no tienen que aparecer en Google (ej. /form) */
+  noindex?: boolean
+  /** Datos estructurados JSON-LD de la página, si tiene */
+  schema?: object
+  /** Imagen para compartir (ruta dentro de public) */
+  imagen?: string
 }
 
-const {
-  title,
-  description = 'Diseñamos y programamos páginas web a medida para emprendedores y pymes. Sin plantillas, sin atajos.',
-} = Astro.props
+const { title, description = SITIO.descripcion, noindex = false, schema, imagen = SITIO.imagenOg } = Astro.props
+
+// Dirección oficial de esta página y de la imagen para compartir.
+const canonical = new URL(Astro.url.pathname, Astro.site)
+const imagenUrl = new URL(imagen, Astro.site)
 ---
 
-<html lang="es">
+<html lang="es-AR">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex, nofollow" /> : <link rel="canonical" href={canonical} />}
     <meta name="theme-color" content="#3130E3" />
-    <!-- Favicon cuadrado: el isotipo centrado con aire, así no se deforma -->
+
+    <!-- Favicons: el .ico en la raíz es el que buscan muchos lectores sin mirar el HTML -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/png" sizes="32x32" href="/marca/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="512x512" href="/marca/favicon-512.png" />
     <link rel="apple-touch-icon" href="/marca/favicon-180.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href={antonUrl} as="font" type="font/woff2" crossorigin />
+
+    <!-- Vista previa al compartir (WhatsApp, redes, Slack, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITIO.nombre} />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imagenUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Mergge Studio, diseño y desarrollo web en Argentina" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
 
     <!-- Antes de pintar nada: si la pantalla de carga ya se vio en esta
-         sesión, la marcamos para que el CSS la oculte y no "parpadee". -->
+         sesión, o si es un celular (ahí no la mostramos: Google mide la
+         velocidad en celular y la espera pesaba ~4 s), la marcamos para que
+         el CSS la oculte y no "parpadee". -->
     <script is:inline>
       try {
-        if (sessionStorage.getItem('mg-precarga')) {
+        if (sessionStorage.getItem('mg-precarga') || window.matchMedia('(max-width: 767px)').matches) {
           document.documentElement.dataset.precarga = 'vista'
           window.__merggeListo = true
         }
