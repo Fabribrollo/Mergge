@@ -3,7 +3,7 @@
 > Estudio de diseño y desarrollo web de Argentina, con base en Mar del Plata. Hace páginas web a medida para emprendedores y pymes de todo el país. Diseño y código los hacen las mismas dos personas, en un mismo proceso.
 
 - Sitio: https://mergge.com.ar
-- Email: hola@mergge.com.ar
+- Email: contacto@mergge.com.ar
 - WhatsApp: +54 9 2235 90-9949
 - Instagram: https://instagram.com/merggestudio
 - Equipo: Delfina Biondi, diseñadora UX/UI, web y de marca; Fabrizio Brollo, desarrollador web full stack

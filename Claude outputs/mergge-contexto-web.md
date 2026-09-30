@@ -94,7 +94,7 @@ Le vendemos a emprendedores, marcas y pymes de toda la Argentina. Lo que nos dif
 | `Proceso` · 03 Cómo trabajamos | Rueda con estrella central, órbita y 6 tarjetas: La charla (Integración), La propuesta (Creatividad), La estructura (Funcionalidad), Diseño y desarrollo (Innovación), Las pruebas (Detalle), Después (Evolución). CTA «Empezar con la charla». |
 | `Servicios` · 05 Diseño | Azul, interactivo. Lista gigante (Branding, Identidad visual, Redes sociales, Packaging): el hover agranda y despliega, y el clic fija. Lead: «También diseñamos la marca que acompaña a tu web.» |
 | `Preguntas-v4` · Preguntas frecuentes | **Versión elegida.** Marrón, preguntas en píldoras a la izquierda y panel crema tipo chat a la derecha (burbuja azul con la pregunta, naranja con la respuesta). Interactivo. |
-| `Cierre` · 06 Hablemos | Naranja. «¿Tenés una idea?» + «HABLEMOS» 250 px con órbita azul, botones WhatsApp (`https://wa.me/[NUMERO]`), hola@mergge.com.ar y @merggestudio. Pie con logo marrón y «© 2026 Mergge Studio». |
+| `Cierre` · 06 Hablemos | Naranja. «¿Tenés una idea?» + «HABLEMOS» 250 px con órbita azul, botones WhatsApp (`https://wa.me/[NUMERO]`), contacto@mergge.com.ar y @merggestudio. Pie con logo marrón y «© 2026 Mergge Studio». |
 | `Analisis-inicio`, `-cargando`, `-resultado` | Página aparte del **análisis gratis** (ver 6). |
 | `Planes-f2` | Planes: **descartados por ahora**. No tocar. |
 | `Mobile` | Versión de 390 px, **desactualizada** (es de antes de todos los cambios). |

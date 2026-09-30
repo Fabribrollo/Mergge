@@ -9,7 +9,7 @@ export const SITIO = {
   nombreCorto: 'Mergge',
   descripcion:
     'Estudio de diseño y desarrollo web en Argentina. Páginas a medida para emprendedores y pymes de todo el país, con precios claros desde USD 400.',
-  email: 'hola@mergge.com.ar',
+  email: 'contacto@mergge.com.ar',
   telefono: '+54 9 2235 90-9949', // como se muestra
   telefonoE164: '+5492235909949', // como lo leen las máquinas (sin espacios)
   whatsapp: 'https://wa.me/5492235909949',
