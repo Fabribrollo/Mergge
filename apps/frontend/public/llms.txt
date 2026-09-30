@@ -6,13 +6,15 @@
 - Email: hola@mergge.com.ar
 - WhatsApp: +54 9 2235 90-9949
 - Instagram: https://instagram.com/merggestudio
-- Equipo: Delfina Biondi (diseño) y Fabrizio Brollo (desarrollo)
+- Equipo: Delfina Biondi, diseñadora UX/UI, web y de marca; Fabrizio Brollo, desarrollador web full stack
+- Ubicación: Mar del Plata, Buenos Aires, Argentina. Trabajan a distancia con clientes de todo el país
 
 ## Planes (valores en dólares, dependen del alcance final)
 
-- Estática · Landing page: USD 400–550, entre 3 y 4 semanas. Una página con diseño a medida, adaptada a celulares, visible en Google, con dominio y alojamiento.
-- Profesional · Autoadministrable: USD 800–1.200, entre 5 y 7 semanas. Lo mismo, más un panel para editar contenidos y mejor posición en Google.
-- A medida · Dinámica o ecommerce: desde USD 1.400, a partir de 8 semanas. Todo lo anterior, más catálogo de productos, pagos online y gestión de ventas.
+- Estática · Landing page: USD 400–550, entre 3 y 4 semanas. Una página con diseño a medida (sin plantillas), adaptada a celulares y visible en Google. Incluye dominio y alojamiento el primer año y un correo con el dominio del cliente.
+- Profesional · Autoadministrable: USD 800–1.200, entre 5 y 7 semanas. Todo lo del plan Estática, más panel de edición para actualizar la web y mejor posición en Google.
+- A medida · Dinámica o ecommerce: desde USD 1.400, a partir de 8 semanas. Todo lo del plan Profesional, más catálogo de productos, pagos online y gestión de ventas.
+- Desde el segundo año, el dominio y el alojamiento se renuevan aparte.
 
 ## Otros servicios de diseño
 

@@ -14,7 +14,7 @@ const PLANES = [
     antes: 'USD',
     precio: '400–550',
     tiempo: 'Entre 3 y 4 semanas',
-    base: ['Diseño a medida', 'Adaptada a celulares', 'Visible en Google', 'Dominio y alojamiento'],
+    base: ['Diseño a medida', 'Adaptada a celulares', 'Visible en Google', 'Dominio y alojamiento', 'Correo con tu @dominio'],
     suma: [],
     fondo:
       'radial-gradient(70% 45% at 100% 0%, rgba(255,69,0,0.55) 0%, rgba(255,69,0,0) 70%), radial-gradient(60% 40% at 0% 100%, rgba(49,48,227,0.28) 0%, rgba(49,48,227,0) 70%), radial-gradient(50% 40% at 20% 20%, #FFFFFF 0%, rgba(255,255,255,0) 70%), #F1EEE4',
@@ -33,7 +33,7 @@ const PLANES = [
     antes: 'USD',
     precio: '800–1.200',
     tiempo: 'Entre 5 y 7 semanas',
-    base: ['Diseño a medida', 'Adaptada a celulares', 'Visible en Google', 'Dominio y alojamiento'],
+    base: ['Diseño a medida', 'Adaptada a celulares', 'Visible en Google', 'Dominio y alojamiento', 'Correo con tu @dominio'],
     suma: ['Panel de edición', 'Mejor posición en Google'],
     fondo:
       'radial-gradient(70% 40% at 100% 0%, rgba(255,69,0,0.85) 0%, rgba(255,69,0,0.3) 35%, rgba(255,69,0,0) 72%), radial-gradient(80% 45% at 0% 100%, rgba(49,48,227,0.8) 0%, rgba(49,48,227,0.25) 40%, rgba(49,48,227,0) 75%), conic-gradient(from 30deg at 55% 55%, #310D00, #451300, #250900, #310D00)',
@@ -53,7 +53,7 @@ const PLANES = [
     antes: 'A partir\nde USD',
     precio: '1.400',
     tiempo: 'A partir de 8 semanas',
-    base: ['Diseño a medida', 'Adaptada a celulares', 'Visible en Google', 'Dominio y alojamiento', 'Panel de edición', 'Mejor posición en Google'],
+    base: ['Diseño a medida', 'Adaptada a celulares', 'Visible en Google', 'Dominio y alojamiento', 'Correo con tu @dominio', 'Panel de edición', 'Mejor posición en Google'],
     suma: ['Catálogo de productos', 'Pagos online', 'Gestión de ventas'],
     fondo:
       'radial-gradient(60% 40% at 100% 0%, rgba(255,69,0,0.75) 0%, rgba(255,69,0,0) 70%), radial-gradient(70% 50% at 0% 100%, #1C1A9A 0%, rgba(28,26,154,0) 72%), radial-gradient(45% 35% at 15% 10%, rgba(140,138,255,0.55) 0%, rgba(140,138,255,0) 70%), #3130E3',
@@ -134,7 +134,7 @@ function Tarjeta({ plan }) {
   return (
     <motion.article
       className={`flex flex-col rounded-[34px] px-6 py-7 md:rounded-[36px] md:px-[34px] ${
-        plan.destacado ? 'md:min-h-[840px] md:py-[54px]' : 'md:min-h-[760px] md:py-[42px]'
+        plan.destacado ? 'md:min-h-[880px] md:py-[54px]' : 'md:min-h-[808px] md:py-[42px]'
       } ${plan.texto}`}
       style={{ background: plan.fondo, boxShadow: plan.sombra }}
       whileHover={{ y: -6 }}

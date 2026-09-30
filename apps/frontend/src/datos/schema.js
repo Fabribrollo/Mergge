@@ -39,9 +39,9 @@ export function schemaHome() {
         founder: SITIO.equipo.map((p) => ({ '@id': id(p.nombre.toLowerCase().replace(/\s+/g, '-')) })),
         sameAs: [SITIO.instagram],
         makesOffer: [
-          { '@type': 'Offer', name: 'Landing page (plan Estática)', priceSpecification: precio(400, 550) },
-          { '@type': 'Offer', name: 'Sitio autoadministrable (plan Profesional)', priceSpecification: precio(800, 1200) },
-          { '@type': 'Offer', name: 'Web a medida o tienda online (plan A medida)', priceSpecification: precio(1400) },
+          { '@type': 'Offer', name: 'Landing page (plan Estática)', description: 'Una página con diseño a medida, adaptada a celulares y visible en Google. Incluye dominio y alojamiento el primer año y un correo con tu dominio. Entre 3 y 4 semanas.', priceSpecification: precio(400, 550) },
+          { '@type': 'Offer', name: 'Sitio autoadministrable (plan Profesional)', description: 'Todo lo del plan Estática, más panel de edición para actualizar la web y mejor posición en Google. Entre 5 y 7 semanas.', priceSpecification: precio(800, 1200) },
+          { '@type': 'Offer', name: 'Web a medida o tienda online (plan A medida)', description: 'Todo lo del plan Profesional, más catálogo de productos, pagos online y gestión de ventas. A partir de 8 semanas.', priceSpecification: precio(1400) },
         ],
       },
       ...SITIO.equipo.map((p) => ({

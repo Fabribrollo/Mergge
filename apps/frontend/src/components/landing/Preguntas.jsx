@@ -9,7 +9,7 @@ import { PREGUNTAS } from '../../datos/sitio.js'
 
 // Orden de las píldoras en celular (índices de PREGUNTAS): primero el precio y
 // después si pueden editar la web. En compu se respeta el orden original.
-const ORDEN_CELULAR = [0, 4, 1, 2, 3, 5, 6]
+const ORDEN_CELULAR = [0, 5, 1, 2, 3, 4, 6, 7]
 
 const SALUDO = '¡Hola! Somos Delfina y Fabrizio. Elegí una pregunta y te contamos.'
 
