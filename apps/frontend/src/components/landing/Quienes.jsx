@@ -86,8 +86,8 @@ export default function Quienes() {
               className="mt-auto max-w-[560px] pt-10 text-[17px] leading-[1.55] text-mg-crema md:ml-auto md:mt-20 md:pt-0 md:text-xl md:leading-normal"
             >
               Mergge existe para transformar ideas en experiencias digitales que conectan marcas con personas. Somos
-              Delfina Biondi, diseñadora UX/UI, web y de marca, y Fabrizio Brollo, desarrollador web full stack.
-              Trabajamos desde Mar del Plata para todo el&nbsp;país.
+              Delfina (Lic. en Diseño Gráfico y UX/UI Designer) y Fabrizio (Desarrollador Web Full Stack).
+              Trabajamos desde Mar del Plata para todo el&nbsp;mundo.
             </Revelar>
           </div>
         </div>

@@ -1,17 +1,17 @@
 # Mergge Studio
 
-> Estudio de diseño y desarrollo web de Argentina, con base en Mar del Plata. Hace páginas web a medida para emprendedores y pymes de todo el país. Diseño y código los hacen las mismas dos personas, en un mismo proceso.
+> Estudio de diseño y desarrollo web de Argentina, con base en Mar del Plata. Hace páginas web a medida para emprendedores y pymes de todo el mundo. Diseño y código los hacen las mismas dos personas, en un mismo proceso.
 
 - Sitio: https://mergge.com.ar
 - Email: contacto@mergge.com.ar
 - WhatsApp: +54 9 2235 90-9949
 - Instagram: https://instagram.com/merggestudio
-- Equipo: Delfina Biondi, diseñadora UX/UI, web y de marca; Fabrizio Brollo, desarrollador web full stack
-- Ubicación: Mar del Plata, Buenos Aires, Argentina. Trabajan a distancia con clientes de todo el país
+- Equipo: Delfina Biondi, Lic. en Diseño Gráfico y UX/UI Designer; Fabrizio Brollo, Desarrollador Web Full Stack
+- Ubicación: Mar del Plata, Buenos Aires, Argentina. Trabajan desde Mar del Plata para todo el mundo, a distancia
 
 ## Planes (valores en dólares, dependen del alcance final)
 
-- Estática · Landing page: USD 400–550, entre 3 y 4 semanas. Una página con diseño a medida (sin plantillas), adaptada a celulares y visible en Google. Incluye dominio y alojamiento el primer año y un correo con el dominio del cliente.
+- Estática · Landing Page: USD 400–550, entre 3 y 4 semanas. Una página con diseño a medida (sin plantillas), adaptada a celulares y visible en Google. Incluye dominio y alojamiento el primer año y un correo con el dominio del cliente.
 - Profesional · Autoadministrable: USD 800–1.200, entre 5 y 7 semanas. Todo lo del plan Estática, más panel de edición para actualizar la web y mejor posición en Google.
 - A medida · Dinámica o ecommerce: desde USD 1.400, a partir de 8 semanas. Todo lo del plan Profesional, más catálogo de productos, pagos online y gestión de ventas.
 - Desde el segundo año, el dominio y el alojamiento se renuevan aparte.

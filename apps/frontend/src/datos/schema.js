@@ -28,18 +28,18 @@ export function schemaHome() {
         description: SITIO.descripcion,
         telephone: SITIO.telefonoE164,
         email: SITIO.email,
-        // La base es Mar del Plata (coincide con Google Business); atendemos a todo el país.
+        // La base es Mar del Plata (coincide con Google Business); trabajamos para todo el mundo.
         address: {
           '@type': 'PostalAddress',
           addressLocality: SITIO.ciudad,
           addressRegion: SITIO.provincia,
           addressCountry: SITIO.pais,
         },
-        areaServed: { '@type': 'Country', name: 'Argentina' },
+        areaServed: { '@type': 'Place', name: 'Todo el mundo' },
         founder: SITIO.equipo.map((p) => ({ '@id': id(p.nombre.toLowerCase().replace(/\s+/g, '-')) })),
         sameAs: [SITIO.instagram],
         makesOffer: [
-          { '@type': 'Offer', name: 'Landing page (plan Estática)', description: 'Una página con diseño a medida, adaptada a celulares y visible en Google. Incluye dominio y alojamiento el primer año y un correo con tu dominio. Entre 3 y 4 semanas.', priceSpecification: precio(400, 550) },
+          { '@type': 'Offer', name: 'Landing Page (plan Estática)', description: 'Una página con diseño a medida, adaptada a celulares y visible en Google. Incluye dominio y alojamiento el primer año y un correo con tu dominio. Entre 3 y 4 semanas.', priceSpecification: precio(400, 550) },
           { '@type': 'Offer', name: 'Sitio autoadministrable (plan Profesional)', description: 'Todo lo del plan Estática, más panel de edición para actualizar la web y mejor posición en Google. Entre 5 y 7 semanas.', priceSpecification: precio(800, 1200) },
           { '@type': 'Offer', name: 'Web a medida o tienda online (plan A medida)', description: 'Todo lo del plan Profesional, más catálogo de productos, pagos online y gestión de ventas. A partir de 8 semanas.', priceSpecification: precio(1400) },
         ],

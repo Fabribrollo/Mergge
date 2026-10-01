@@ -123,7 +123,7 @@ export default function Preguntas() {
               />
             </div>
             <Revelar as="p" className="mt-8 text-[17px] leading-normal text-mg-crema/85 md:text-xl">
-              Tocá una pregunta y te respondemos {esCompu ? 'al lado' : 'abajo'}.
+              Tocá una pregunta y te respondemos.
             </Revelar>
 
             {/* Píldoras: en compu se acomodan en varias líneas; en celular, una fila que se desliza */}
@@ -188,8 +188,9 @@ export default function Preguntas() {
           >
             {/* Cabecera */}
             <div className="flex items-center gap-3 border-b border-mg-marron/10 px-[18px] py-3.5 md:gap-3.5 md:px-7 md:py-5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-mg-marron md:h-12 md:w-12">
-                <Estrella color="#FF4500" className="h-[22px] w-[22px] rotate-[10deg] md:h-7 md:w-7" />
+              {/* Avatar: el isotipo de Mergge (la doble G). Fondo crema porque el logo lleva marrón. */}
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-mg-crema ring-1 ring-mg-marron/10 md:h-12 md:w-12">
+                <img src="/marca/isotipo.png" alt="" width="640" height="386" className="h-auto w-[26px] md:w-[31px]" />
               </div>
               <div className="flex flex-col">
                 <span className="text-[15px] font-semibold text-mg-marron md:text-[17px]">Mergge Studio</span>

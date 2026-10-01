@@ -8,7 +8,7 @@ import { alAparecer, dur, ease, stagger } from './ui/movimiento.js'
 const PLANES = [
   {
     id: 'estatica',
-    etiqueta: 'Landing page',
+    etiqueta: 'Landing Page',
     nombre: 'Estática',
     bajada: 'Una página, bien hecha, para presentarte y que te escriban.',
     antes: 'USD',

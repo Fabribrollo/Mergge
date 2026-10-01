@@ -8,19 +8,20 @@ export const SITIO = {
   nombre: 'Mergge Studio',
   nombreCorto: 'Mergge',
   descripcion:
-    'Estudio de diseño y desarrollo web en Argentina. Páginas a medida para emprendedores y pymes de todo el país, con precios claros desde USD 400.',
+    'Estudio de diseño y desarrollo web en Argentina. Páginas a medida para emprendedores y pymes de todo el mundo, con precios claros desde USD 400.',
   email: 'contacto@mergge.com.ar',
   telefono: '+54 9 2235 90-9949', // como se muestra
   telefonoE164: '+5492235909949', // como lo leen las máquinas (sin espacios)
-  whatsapp: 'https://wa.me/5492235909949',
+  // El link de WhatsApp abre el chat con este mensaje ya escrito (el cliente lo puede cambiar antes de enviar).
+  whatsapp: `https://wa.me/5492235909949?text=${encodeURIComponent('¡Hola, Mergge Studio! Quiero hacer una consulta sobre una página web.')}`,
   instagram: 'https://instagram.com/merggestudio',
   ciudad: 'Mar del Plata',
   provincia: 'Buenos Aires',
   pais: 'AR',
   imagenOg: '/og/mergge-og.jpg',
   equipo: [
-    { nombre: 'Delfina Biondi', rol: 'Diseñadora UX/UI, web y de marca', perfiles: ['https://www.linkedin.com/in/delfinabiondi', 'https://www.behance.net/delfinabiondi'] },
-    { nombre: 'Fabrizio Brollo', rol: 'Desarrollador web full stack', perfiles: ['https://www.linkedin.com/in/fabrizio-brollo-03b964342'] },
+    { nombre: 'Delfina Biondi', rol: 'Lic. en Diseño Gráfico y UX/UI Designer', perfiles: ['https://www.linkedin.com/in/delfinabiondi', 'https://www.behance.net/delfinabiondi'] },
+    { nombre: 'Fabrizio Brollo', rol: 'Desarrollador Web Full Stack', perfiles: ['https://www.linkedin.com/in/fabrizio-brollo-03b964342'] },
   ],
 }
 
@@ -34,6 +35,6 @@ export const PREGUNTAS = [
   ['¿Cuánto tarda?', 'Una landing page lleva entre 3 y 4 semanas, un sitio autoadministrable entre 5 y 7, y una web a medida o tienda online desde 8 semanas. La fecha exacta te la damos en la propuesta.'],
   ['¿Qué tengo que tener listo?', 'Saber qué hace tu negocio y a quién le vende. Si ya tenés logo, textos y fotos, mejor; si te falta algo, lo vemos juntos en la charla.'],
   ['¿Voy a poder cambiar cosas yo?', 'Sí, con los planes Profesional y A medida: incluyen un panel simple para cambiar textos y fotos, y te enseñamos a usarlo. En la landing page (plan Estática) los cambios los hacemos nosotros.'],
-  ['¿Trabajan con gente de otras ciudades?', 'Sí. Somos de Mar del Plata y trabajamos con gente de todo el país. Todo el proceso se hace a distancia.'],
+  ['¿Trabajan con gente de otras ciudades o países?', 'Sí. Trabajamos desde Mar del Plata para todo el mundo. Todo el proceso se hace a distancia.'],
   ['¿Usan plantillas?', 'No. Cada web se diseña y se programa desde cero para tu negocio, y la pensamos los dos juntos desde el primer boceto.'],
 ]
