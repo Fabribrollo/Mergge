@@ -41,14 +41,41 @@ const id = import.meta.env.PUBLIC_UMAMI_ID
     return el.closest('section[id]')?.id || location.pathname
   }
 
+  // Plan elegido: el botón "Elegir …" de cada tarjeta (marcada con data-plan)
+  // se cuenta como "elegir-plan". Además lo recordamos durante la visita, así
+  // si después escribe por WhatsApp o mail sabemos qué plan venía mirando.
+  const CLAVE_PLAN = 'mg-plan'
+  function planRecordado() {
+    try {
+      return sessionStorage.getItem(CLAVE_PLAN)
+    } catch {
+      return null
+    }
+  }
+  function recordarPlan(plan: string) {
+    try {
+      sessionStorage.setItem(CLAVE_PLAN, plan)
+    } catch {}
+  }
+
   document.addEventListener(
     'click',
     (e) => {
       const link = (e.target as Element | null)?.closest?.('a[href]')
       if (!link) return
+      const umami = (window as unknown as { umami?: Umami }).umami
+      const plan = (link.closest('[data-plan]') as HTMLElement | null)?.dataset.plan
+      if (plan) {
+        recordarPlan(plan)
+        umami?.track('elegir-plan', { plan })
+        return
+      }
       const evento = tipoDeContacto(link.getAttribute('href') || '')
       if (!evento) return
-      ;(window as unknown as { umami?: Umami }).umami?.track(evento, { seccion: seccionDe(link) })
+      const datos: Record<string, string> = { seccion: seccionDe(link) }
+      const anterior = planRecordado()
+      if (anterior) datos.plan = anterior
+      umami?.track(evento, datos)
     },
     true,
   )

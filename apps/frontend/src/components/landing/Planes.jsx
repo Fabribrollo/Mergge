@@ -133,6 +133,7 @@ export default function Planes() {
 function Tarjeta({ plan }) {
   return (
     <motion.article
+      data-plan={plan.nombre}
       className={`flex flex-col rounded-[34px] px-6 py-7 md:rounded-[36px] md:px-[34px] ${
         plan.destacado ? 'md:min-h-[880px] md:py-[54px]' : 'md:min-h-[808px] md:py-[42px]'
       } ${plan.texto}`}
