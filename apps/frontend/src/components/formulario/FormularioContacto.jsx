@@ -76,6 +76,16 @@ export default function FormularioContacto() {
     setPaso((p) => Math.max(1, p - 1))
   }
 
+  // Medición (Umami): hasta qué paso llega cada persona y si lo envía.
+  // Así vemos en qué paso abandonan. Nunca mandamos lo que escribieron, solo el número de paso.
+  const pasoMaximo = useRef(1)
+  useEffect(() => {
+    if (paso <= pasoMaximo.current) return
+    pasoMaximo.current = paso
+    if (paso <= TOTAL_PASOS) window.umami?.track('formulario-paso', { paso: String(paso) })
+    else window.umami?.track('formulario-enviado')
+  }, [paso])
+
   // Renderiza el widget de Turnstile cuando se llega al último paso. El script
   // de Cloudflare se carga async desde contacto.astro, así que puede no estar
   // listo todavía cuando este efecto corre por primera vez — por eso reintenta.
@@ -161,6 +171,7 @@ export default function FormularioContacto() {
           setDatos(ESTADO_INICIAL)
           widgetIdRef.current = null
           setEnviando(false)
+          pasoMaximo.current = 1
           setPaso(1)
         }}
       />

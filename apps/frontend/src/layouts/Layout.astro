@@ -12,6 +12,7 @@ import '@fontsource/poppins/latin-700.css'
 // Anton es la del título grande: la pedimos apenas arranca la página.
 import antonUrl from '@fontsource/anton/files/anton-latin-400-normal.woff2?url'
 import { SITIO } from '../datos/sitio.js'
+import Medicion from '../components/Medicion.astro'
 
 interface Props {
   title: string
@@ -63,6 +64,8 @@ const imagenUrl = new URL(imagen, Astro.site)
     <meta name="twitter:card" content="summary_large_image" />
 
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+
+    <Medicion />
 
     <!-- Antes de pintar nada: si la pantalla de carga ya se vio en esta
          sesión, o si es un celular (ahí no la mostramos: Google mide la

@@ -1,0 +1,55 @@
+---
+// Medición de visitas y contactos con Umami (sin cookies, no hace falta banner).
+//
+// El ID del sitio se carga como variable de entorno PUBLIC_UMAMI_ID en Vercel,
+// solo en Production: así las vistas previas y el entorno local no cuentan.
+// No es un secreto (termina en el HTML), pero tenerlo afuera del código evita
+// ensuciar los números cuando probamos.
+const id = import.meta.env.PUBLIC_UMAMI_ID
+---
+
+{
+  id && (
+    <script
+      is:inline
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id={id}
+      data-domains="mergge.com.ar"
+    />
+  )
+}
+
+<script>
+  // Contactos: en vez de marcar cada botón, escuchamos los clics de toda la
+  // página y reconocemos el destino del link. Así un botón nuevo de WhatsApp
+  // se cuenta solo, sin acordarse de agregarle nada.
+  type Umami = { track: (evento: string, datos?: Record<string, string>) => void }
+
+  function tipoDeContacto(href: string) {
+    if (href.includes('wa.me')) return 'whatsapp'
+    if (href.startsWith('mailto:')) return 'email'
+    if (href.includes('instagram.com')) return 'instagram'
+    if (href.endsWith('#contacto')) return 'ir-a-contacto'
+    return null
+  }
+
+  // En qué parte de la página estaba el botón (para saber qué sección convence).
+  function seccionDe(el: Element) {
+    if (el.closest('header')) return 'menu'
+    if (el.closest('footer')) return 'footer'
+    return el.closest('section[id]')?.id || location.pathname
+  }
+
+  document.addEventListener(
+    'click',
+    (e) => {
+      const link = (e.target as Element | null)?.closest?.('a[href]')
+      if (!link) return
+      const evento = tipoDeContacto(link.getAttribute('href') || '')
+      if (!evento) return
+      ;(window as unknown as { umami?: Umami }).umami?.track(evento, { seccion: seccionDe(link) })
+    },
+    true,
+  )
+</script>

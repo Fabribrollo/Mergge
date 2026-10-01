@@ -7,6 +7,7 @@ import '@fontsource/poppins/latin-600.css'
 import '@fontsource/poppins/latin-700.css'
 import FormularioContacto from '../components/formulario/FormularioContacto.jsx'
 import { SITIO } from '../datos/sitio.js'
+import Medicion from '../components/Medicion.astro'
 
 // Esta página se manda por link a cada cliente (como un Google Form).
 // No tiene que aparecer en Google: lleva noindex y queda fuera del sitemap.
@@ -39,6 +40,7 @@ const imagenUrl = new URL(SITIO.imagenOg, Astro.site)
     <!-- Carga async: el widget se renderiza recién al llegar al último paso,
          así que no hace falta bloquear nada acá. -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <Medicion />
   </head>
   <body>
     <main>
