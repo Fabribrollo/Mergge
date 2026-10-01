@@ -44,6 +44,8 @@ const imagenUrl = new URL(imagen, Astro.site)
     <!-- Favicons: el .ico en la raíz es el que buscan muchos lectores sin mirar el HTML -->
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/png" sizes="32x32" href="/marca/favicon-32.png" />
+    <!-- Google pide un ícono cuadrado múltiplo de 48 px (48, 96, 192…): el .ico de 48 y este de 192 -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/marca/favicon-192.png" />
     <link rel="icon" type="image/png" sizes="512x512" href="/marca/favicon-512.png" />
     <link rel="apple-touch-icon" href="/marca/favicon-180.png" />
     <link rel="manifest" href="/site.webmanifest" />
