@@ -4,5 +4,6 @@ dist/
 .env
 .env.*
 .CLAUDE.md
+CLAUDE.md
 .AGENTS.md
 Claude outputs/

@@ -110,8 +110,8 @@ const imagenUrl = new URL(imagen, Astro.site)
           requestAnimationFrame(loop)
         }
         requestAnimationFrame(loop)
-        // La pantalla de carga frena el scroll hasta que termina.
-        if (!(window as any).__merggeListo) {
+        // La pantalla de carga (solo existe en la home) frena el scroll hasta que termina.
+        if (document.getElementById('mg-precarga') && !(window as any).__merggeListo) {
           lenis.stop()
           window.addEventListener('mergge:listo', () => lenis!.start(), { once: true })
         }
@@ -126,7 +126,8 @@ const imagenUrl = new URL(imagen, Astro.site)
         const arriba = r.top + window.scrollY
         const alto = window.innerHeight
         if (r.height <= alto) return arriba - (alto - r.height) / 2
-        return arriba + Number(seccion.dataset.ancla || 0)
+        const movil = window.innerWidth < 768 && seccion.dataset.anclaMovil !== undefined
+        return arriba + Number((movil ? seccion.dataset.anclaMovil : seccion.dataset.ancla) || 0)
       }
 
       document.addEventListener(
@@ -141,7 +142,14 @@ const imagenUrl = new URL(imagen, Astro.site)
           // Un respiro para que el menú de celular se cierre (libera el scroll) antes de movernos.
           setTimeout(() => {
             const y = Math.max(0, destino(seccion))
-            if (lenis) lenis.scrollTo(y, { duration: 1.2 })
+            if (lenis)
+              lenis.scrollTo(y, {
+                duration: 1.2,
+                onComplete: () => {
+                  const y2 = Math.max(0, destino(seccion))
+                  if (Math.abs(y2 - window.scrollY) > 4) lenis!.scrollTo(y2, { duration: 0.5 })
+                },
+              })
             else window.scrollTo({ top: y, behavior: menosMovimiento ? 'auto' : 'smooth' })
           }, 60)
         },

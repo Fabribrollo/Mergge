@@ -15,6 +15,7 @@ export const SITIO = {
   // El link de WhatsApp abre el chat con este mensaje ya escrito (el cliente lo puede cambiar antes de enviar).
   whatsapp: `https://wa.me/5492235909949?text=${encodeURIComponent('¡Hola, Mergge Studio! Quiero hacer una consulta sobre una página web.')}`,
   instagram: 'https://instagram.com/merggestudio',
+  linkedin: 'https://www.linkedin.com/company/144842909',
   ciudad: 'Mar del Plata',
   provincia: 'Buenos Aires',
   pais: 'AR',

@@ -18,7 +18,7 @@ const cerca = { rootMargin: '400px' }
 
 <Layout title="Agencia de Diseño y Desarrollo Web en Argentina - Mergge" schema={schemaHome()}>
   <Precarga />
-  <Header client:load />
+  <Header client:load ruta="/" />
   <main>
     <!-- La apertura se hidrata enseguida: su secuencia arranca al cerrar la precarga. -->
     <Apertura client:load />

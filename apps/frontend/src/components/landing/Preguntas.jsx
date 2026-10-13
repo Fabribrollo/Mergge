@@ -26,7 +26,13 @@ const MAX_MENSAJES = 7 // saludo + las últimas 3 preguntas con su respuesta
 let contador = 0
 const nuevoId = () => `m${++contador}`
 
-export default function Preguntas() {
+// Se usa en la home (con las preguntas generales) y en cada página de plan
+// (con las suyas). `fondo` cambia el degradé de arriba según la sección anterior.
+const FONDO_HOME = 'linear-gradient(180deg, #3130E3 0, #310D00 var(--mezcla), #310D00 100%)'
+
+export default function Preguntas({ preguntas = PREGUNTAS, fondo = FONDO_HOME, arriba = 'pt-24 md:pt-[212px]' }) {
+  // El orden especial de celular es solo para la lista de la home.
+  const ordenCelular = preguntas === PREGUNTAS ? ORDEN_CELULAR : preguntas.map((_, i) => i)
   const esCompu = useEsCompu()
   const [mensajes, setMensajes] = useState([])
   const [sel, setSel] = useState(null)
@@ -66,7 +72,7 @@ export default function Preguntas() {
       }
       limpiarTimers()
       setSel(i)
-      const [pregunta, respuesta] = PREGUNTAS[i]
+      const [pregunta, respuesta] = preguntas[i]
       const idVos = nuevoId()
       const idResp = nuevoId()
 
@@ -83,7 +89,7 @@ export default function Preguntas() {
         setLeido(null)
       })
     },
-    [mensajes, sel],
+    [mensajes, sel, preguntas],
   )
 
   return (
@@ -92,7 +98,7 @@ export default function Preguntas() {
         id="preguntas"
         data-tono="49,13,0"
         className="mg-seccion [--mezcla:110px] md:[--mezcla:160px]"
-        style={{ background: 'linear-gradient(180deg, #3130E3 0, #310D00 var(--mezcla), #310D00 100%)' }}
+        style={{ background: fondo }}
       >
         {/* Luz naranja que viene desde Diseño */}
         <div
@@ -112,7 +118,7 @@ export default function Preguntas() {
           </div>
         </div>
 
-        <div className="mg-contenido grid gap-8 px-[22px] pb-20 pt-24 md:grid-cols-[minmax(0,570px)_minmax(0,716px)] md:justify-between md:gap-10 md:px-[50px] md:pb-[70px] md:pt-[212px]">
+        <div className={`mg-contenido grid gap-8 px-[22px] pb-20 md:grid-cols-[minmax(0,570px)_minmax(0,716px)] md:justify-between md:gap-10 md:px-[50px] md:pb-[70px] ${arriba}`}>
           {/* Columna izquierda */}
           <div className="min-w-0">
             <div className="relative">
@@ -129,14 +135,14 @@ export default function Preguntas() {
             {/* Píldoras: en compu se acomodan en varias líneas; en celular, una fila que se desliza */}
             <Revelar as="div" className="-mx-[22px] mt-6 overflow-x-auto overscroll-x-contain px-[22px] [scrollbar-width:none] md:mx-0 md:overflow-visible md:px-0">
               <div className="flex w-max gap-2 md:w-auto md:flex-wrap md:gap-2.5">
-                {PREGUNTAS.map(([pregunta], i) => (
+                {preguntas.map(([pregunta], i) => (
                   <motion.button
                     key={pregunta}
                     ref={(el) => (pildorasRef.current[i] = el)}
                     type="button"
                     onClick={() => elegir(i)}
                     aria-pressed={sel === i}
-                    style={{ '--orden': ORDEN_CELULAR.indexOf(i) }}
+                    style={{ '--orden': ordenCelular.indexOf(i) }}
                     className={`relative order-(--orden) h-[42px] shrink-0 md:order-none whitespace-nowrap rounded-full px-[18px] text-sm font-semibold md:h-12 md:px-[22px] md:text-base ${
                       sel === i ? 'text-mg-marron' : 'text-mg-crema'
                     }`}
@@ -159,7 +165,7 @@ export default function Preguntas() {
                 (el chat las muestra de a una), pero quedan en el HTML: así las leen
                 Google, las IAs (que no ejecutan el chat) y los lectores de pantalla. */}
             <dl className="sr-only">
-              {PREGUNTAS.map(([pregunta, respuesta]) => (
+              {preguntas.map(([pregunta, respuesta]) => (
                 <div key={pregunta}>
                   <dt>{pregunta}</dt>
                   <dd>{respuesta}</dd>

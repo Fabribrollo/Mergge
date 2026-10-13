@@ -6,6 +6,7 @@ import { Revelar } from './ui/Revelar.jsx'
 import { alAparecer, dur, ease, stagger } from './ui/movimiento.js'
 import useEsCompu from './ui/useEsCompu.js'
 import { SITIO } from '../../datos/sitio.js'
+import { PLANES } from '../../datos/planes.js'
 
 const PALABRA = 'Hablemos'
 
@@ -28,10 +29,31 @@ const Icono = {
       <circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" />
     </svg>
   ),
+  linkedin: (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="4" />
+      <circle cx="8.3" cy="8.2" r="0.9" fill="currentColor" stroke="none" />
+      <path d="M8.3 11v5.5M11.8 16.5V11M11.8 13.6a2.4 2.4 0 0 1 4.8 0v2.9" />
+    </svg>
+  ),
 }
 
-// 06 · Hablemos + pie.
-export default function Cierre() {
+// 06 · Hablemos + pie. Se usa en la home y en las páginas de cada plan.
+// `corte`: en las páginas de plan la sección de arriba ya termina en marrón
+// con su propio degradé, así que acá el naranja arranca derecho, sin mezcla.
+export default function Cierre({
+  ruta = '/',
+  titulo = '¿Tenés una idea?',
+  texto = 'Contanos qué tenés en mente. La primera charla no tiene costo ni\u00A0compromiso.',
+  corte = false,
+}) {
+  const enHome = ruta === '/'
+  // Links del pie a las páginas de servicio: además de servir a la persona,
+  // así Google encuentra cada página desde todas las demás.
+  const paginas = [
+    ...PLANES.map((p) => ({ texto: p.producto, href: p.ruta })),
+    { texto: 'Diseño', href: enHome ? '#diseno' : '/#diseno' },
+  ]
   const esCompu = useEsCompu()
   const ref = useRef(null)
   const tituloRef = useRef(null)
@@ -54,13 +76,9 @@ export default function Cierre() {
         data-tono="255,69,0"
         data-ancla="200"
         className="mg-seccion text-mg-marron [--mezcla:240px] md:[--mezcla:340px]"
-        style={{ background: 'linear-gradient(180deg, #310D00 0, #8A2600 calc(var(--mezcla) * 0.45), #FF4500 var(--mezcla), #FF4500 100%)' }}
+        style={{ background: corte ? '#FF4500' : 'linear-gradient(180deg, #310D00 0, #8A2600 calc(var(--mezcla) * 0.45), #FF4500 var(--mezcla), #FF4500 100%)' }}
       >
         <div className="mg-recorte" aria-hidden="true">
-          <div
-            className="absolute left-[-20%] top-[40px] h-[600px] w-[140%] md:left-[-10%] md:top-[0px] md:h-[1120px] md:w-[125%]"
-            style={{ background: 'radial-gradient(closest-side, rgba(255,170,130,0.5) 0%, rgba(255,170,130,0) 100%)' }}
-          />
           <div
             className="absolute right-[-330px] top-[45%] h-[660px] w-[660px] md:right-[-620px] md:top-[20%] md:h-[1240px] md:w-[1240px]"
             style={{ background: 'radial-gradient(circle, rgba(49,48,227,0.72) 0%, rgba(49,48,227,0.32) 38%, rgba(49,48,227,0) 72%)' }}
@@ -73,9 +91,9 @@ export default function Cierre() {
           </motion.div>
         </div>
 
-        <div className="mg-contenido px-[22px] pt-[230px] md:px-[48px] md:pt-[330px]">
+        <div className={`mg-contenido px-[22px] md:px-[48px] ${corte ? 'pt-[110px] md:pt-[146px]' : 'pt-[230px] md:pt-[330px]'}`}>
           <Revelar as="p" className="font-titulo text-[10.2vw] uppercase leading-none md:text-[min(5vw,72px)]">
-            ¿Tenés una idea?
+            {titulo}
           </Revelar>
 
           {/* HABLEMOS entra letra por letra; después se dibuja la órbita azul y cae la estrella */}
@@ -106,14 +124,14 @@ export default function Cierre() {
           </div>
 
           <Revelar as="p" className="mt-12 max-w-[880px] text-[17px] leading-[1.6] md:mt-[70px] md:text-xl md:leading-normal">
-            Contanos qué tenés en mente. La primera charla no tiene costo ni&nbsp;compromiso.
+            {texto}
           </Revelar>
 
           <div className="mt-9 flex flex-col gap-3.5 md:mt-8 md:flex-row md:gap-3.5">
             {[
               { href: SITIO.whatsapp, texto: 'Escribinos por WhatsApp', icono: Icono.whatsapp, oscuro: true },
               { href: `mailto:${SITIO.email}`, texto: SITIO.email, icono: Icono.mail },
-              { href: 'https://instagram.com/merggestudio', texto: '@merggestudio', icono: Icono.instagram },
+              { href: SITIO.instagram, texto: '@merggestudio', icono: Icono.instagram },
             ].map((b, i) => (
               <motion.a
                 key={b.href}
@@ -148,8 +166,40 @@ export default function Cierre() {
 
           {/* Pie */}
           <footer className="-mx-[22px] mt-24 border-t border-mg-marron/25 px-[22px] pb-10 pt-8 md:-mx-[48px] md:mt-[130px] md:px-[50px] md:py-6">
+            <nav aria-label="Servicios" className="mb-6 md:mb-5">
+              <ul className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[13.5px] font-semibold text-mg-marron/85 md:text-sm">
+                {paginas.map((p, i) => (
+                  <li key={p.href} className="flex items-center">
+                    {i > 0 && <Separador siempre />}
+                    <a href={p.href} aria-current={p.href === ruta ? 'page' : undefined} className="inline-block py-1.5 hover:text-mg-marron">
+                      {p.texto}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
             <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between md:gap-6">
-              <img src="/marca/logo-marron.png" alt="Mergge Studio" className="h-5 w-auto" width="133" height="20" />
+              {/* Logo y redes: los mismos perfiles que declara el schema (sameAs) */}
+              <div className="flex items-center gap-5">
+                <img src="/marca/logo-marron.png" alt="Mergge Studio" className="h-5 w-auto" width="133" height="20" />
+                <div className="flex items-center gap-1">
+                  {[
+                    { href: SITIO.instagram, nombre: 'Instagram de Mergge Studio', icono: Icono.instagram },
+                    { href: SITIO.linkedin, nombre: 'LinkedIn de Mergge Studio', icono: Icono.linkedin },
+                  ].map((red) => (
+                    <a
+                      key={red.href}
+                      href={red.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={red.nombre}
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full text-mg-marron/80 transition-colors hover:bg-mg-marron/10 hover:text-mg-marron"
+                    >
+                      {red.icono}
+                    </a>
+                  ))}
+                </div>
+              </div>
               {/* Teléfono, email y ciudad escritos como texto (no solo dentro de un link),
                   iguales a Google Business: que coincidan en todos lados suma confianza. */}
               <div className="flex flex-col gap-1 text-[12.5px] text-mg-marron/80 md:items-end md:gap-1.5 md:text-sm">
@@ -177,9 +227,10 @@ export default function Cierre() {
   )
 }
 
-function Separador() {
+// `siempre`: también en celular (en los datos de contacto, en celular van uno debajo del otro).
+function Separador({ siempre = false }) {
   return (
-    <span className="mx-3 hidden h-2.5 w-2.5 md:block" aria-hidden="true">
+    <span className={`h-2.5 w-2.5 ${siempre ? 'mx-2.5 block md:mx-3' : 'mx-3 hidden md:block'}`} aria-hidden="true">
       <Estrella color="#310D00" className="h-full w-full opacity-60" />
     </span>
   )

@@ -1,0 +1,42 @@
+---
+// La página de un plan. Cada archivo de src/pages (landing-page.astro, etc.)
+// solo dice qué plan es; el armado es el mismo para los tres.
+import Layout from '../../layouts/Layout.astro'
+import Header from '../landing/Header.jsx'
+import AperturaPlan from './AperturaPlan.jsx'
+import QueEs from './QueEs.jsx'
+import Incluye from './Incluye.jsx'
+import Precio from './Precio.jsx'
+import ComoLoHacemos from './ComoLoHacemos.jsx'
+import Preguntas from '../landing/Preguntas.jsx'
+import Cierre from '../landing/Cierre.jsx'
+import { planPorId, PAGINAS_PLAN } from '../../datos/planes.js'
+import { schemaPlan } from '../../datos/schema.js'
+
+interface Props {
+  id: 'estatica' | 'profesional' | 'a-medida'
+}
+
+const plan = planPorId(Astro.props.id)
+const pagina = PAGINAS_PLAN[Astro.props.id]
+const cerca = { rootMargin: '400px' }
+---
+
+<Layout title={pagina.seo.titulo} description={pagina.seo.descripcion} schema={schemaPlan(plan, pagina)}>
+  <Header client:load ruta={plan.ruta} />
+  <main>
+    <AperturaPlan client:load plan={plan} contenido={pagina.apertura} />
+    <QueEs client:visible={cerca} plan={plan} contenido={pagina.queEs} />
+    <Incluye client:visible={cerca} contenido={pagina.incluye} arriba={pagina.queEs.fondo} abajo={plan.id === 'a-medida' ? 'marron' : 'azul'} />
+    <Precio client:visible={cerca} plan={plan} paraVos={pagina.paraVos} />
+    <ComoLoHacemos client:visible={cerca} intro={pagina.proceso} />
+    <Preguntas client:visible={cerca} preguntas={pagina.preguntas} fondo="#310D00" arriba="pt-24 md:pt-[136px]" />
+    <Cierre
+      client:visible={cerca}
+      ruta={plan.ruta}
+      corte
+      titulo={pagina.cierre}
+      texto={"Contanos qué tenés en mente. La primera charla, por videollamada, no tiene costo ni\u00A0compromiso."}
+    />
+  </main>
+</Layout>

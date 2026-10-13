@@ -3,68 +3,7 @@ import Estrella from './ui/Estrella.jsx'
 import Boton from './ui/Boton.jsx'
 import { Revelar, TituloEnLineas } from './ui/Revelar.jsx'
 import { alAparecer, dur, ease, stagger } from './ui/movimiento.js'
-
-// Cada plan tiene su "piel": fondo, colores de texto, estrella y botón.
-const PLANES = [
-  {
-    id: 'estatica',
-    etiqueta: 'Landing Page',
-    nombre: 'Estática',
-    bajada: 'Una página, bien hecha, para presentarte y que te escriban.',
-    antes: 'USD',
-    precio: '400–550',
-    tiempo: 'Entre 3 y 4 semanas',
-    base: ['Diseño a medida', 'Adaptada a celulares', 'Visible en Google', 'Dominio y alojamiento', 'Correo con tu @dominio'],
-    suma: [],
-    fondo:
-      'radial-gradient(70% 45% at 100% 0%, rgba(255,69,0,0.55) 0%, rgba(255,69,0,0) 70%), radial-gradient(60% 40% at 0% 100%, rgba(49,48,227,0.28) 0%, rgba(49,48,227,0) 70%), radial-gradient(50% 40% at 20% 20%, #FFFFFF 0%, rgba(255,255,255,0) 70%), #F1EEE4',
-    sombra: '0 30px 60px -30px rgba(49,13,0,0.5)',
-    texto: 'text-mg-marron',
-    suave: 'text-mg-marron/65',
-    linea: 'bg-mg-marron/15',
-    estrella: '#3130E3',
-    boton: 'marron',
-  },
-  {
-    id: 'profesional',
-    etiqueta: 'Autoadministrable',
-    nombre: 'Profesional',
-    bajada: 'Un sitio completo que actualizás vos, sin depender de nadie.',
-    antes: 'USD',
-    precio: '800–1.200',
-    tiempo: 'Entre 5 y 7 semanas',
-    base: ['Diseño a medida', 'Adaptada a celulares', 'Visible en Google', 'Dominio y alojamiento', 'Correo con tu @dominio'],
-    suma: ['Panel de edición', 'Mejor posición en Google'],
-    fondo:
-      'radial-gradient(70% 40% at 100% 0%, rgba(255,69,0,0.85) 0%, rgba(255,69,0,0.3) 35%, rgba(255,69,0,0) 72%), radial-gradient(80% 45% at 0% 100%, rgba(49,48,227,0.8) 0%, rgba(49,48,227,0.25) 40%, rgba(49,48,227,0) 75%), conic-gradient(from 30deg at 55% 55%, #310D00, #451300, #250900, #310D00)',
-    sombra: '0 60px 110px -30px rgba(49,13,0,0.8)',
-    texto: 'text-mg-crema',
-    suave: 'text-mg-crema/70',
-    linea: 'bg-mg-crema/15',
-    estrella: '#FF4500',
-    boton: 'naranja',
-    destacado: true,
-  },
-  {
-    id: 'a-medida',
-    etiqueta: 'Dinámica · ecommerce',
-    nombre: 'A medida',
-    bajada: 'Tu tienda o tu sistema, pensado y programado desde cero.',
-    antes: 'A partir\nde USD',
-    precio: '1.400',
-    tiempo: 'A partir de 8 semanas',
-    base: ['Diseño a medida', 'Adaptada a celulares', 'Visible en Google', 'Dominio y alojamiento', 'Correo con tu @dominio', 'Panel de edición', 'Mejor posición en Google'],
-    suma: ['Catálogo de productos', 'Pagos online', 'Gestión de ventas'],
-    fondo:
-      'radial-gradient(60% 40% at 100% 0%, rgba(255,69,0,0.75) 0%, rgba(255,69,0,0) 70%), radial-gradient(70% 50% at 0% 100%, #1C1A9A 0%, rgba(28,26,154,0) 72%), radial-gradient(45% 35% at 15% 10%, rgba(140,138,255,0.55) 0%, rgba(140,138,255,0) 70%), #3130E3',
-    sombra: '0 30px 60px -30px rgba(20,18,140,0.7)',
-    texto: 'text-mg-crema',
-    suave: 'text-mg-crema/70',
-    linea: 'bg-mg-crema/15',
-    estrella: '#FF4500',
-    boton: 'crema',
-  },
-]
+import { PLANES } from '../../datos/planes.js'
 
 const Reloj = () => (
   <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
@@ -130,12 +69,14 @@ export default function Planes() {
   )
 }
 
-function Tarjeta({ plan }) {
+// La tarjeta de un plan. En la home lleva el link a la página del plan; en esa
+// página (sinLink) no, y ahí tampoco repite la bajada (sinBajada).
+export function Tarjeta({ plan, sinBajada = false, sinLink = false, className = '' }) {
   return (
     <motion.article
       data-plan={plan.nombre}
       className={`flex flex-col rounded-[34px] px-6 py-7 md:rounded-[36px] md:px-[34px] ${
-        plan.destacado ? 'md:min-h-[880px] md:py-[54px]' : 'md:min-h-[808px] md:py-[42px]'
+        className || (plan.destacado ? 'md:min-h-[880px] md:py-[54px]' : 'md:min-h-[808px] md:py-[42px]')
       } ${plan.texto}`}
       style={{ background: plan.fondo, boxShadow: plan.sombra }}
       whileHover={{ y: -6 }}
@@ -145,7 +86,7 @@ function Tarjeta({ plan }) {
       <h3 className={`mt-3.5 font-titulo uppercase leading-[0.95] ${plan.destacado ? 'text-[52px] md:text-[60px]' : 'text-[46px] md:text-[52px]'}`}>
         {plan.nombre}
       </h3>
-      <p className={`mt-2 text-[15px] leading-[1.45] ${plan.suave}`}>{plan.bajada}</p>
+      {!sinBajada && <p className={`mt-2 text-[15px] leading-[1.45] ${plan.suave}`}>{plan.bajada}</p>}
 
       <div className="mt-7 flex items-end gap-2">
         <span className="whitespace-pre-line pb-[0.35em] font-titulo text-xl uppercase leading-[0.9]">{plan.antes}</span>
@@ -166,7 +107,7 @@ function Tarjeta({ plan }) {
         ))}
       </ul>
 
-      <div className="mt-8 pt-2 md:mt-auto">
+      <div className="mt-8 flex flex-col pt-2 md:mt-auto">
         <Boton
           href="#contacto"
           variante={plan.boton === 'crema' ? 'marron' : plan.boton}
@@ -174,6 +115,17 @@ function Tarjeta({ plan }) {
         >
           Elegir {plan.nombre}
         </Boton>
+        {/* Link a la página del plan: lleva a Google (y a la persona) al detalle. */}
+        {!sinLink && (
+          <a
+            href={plan.ruta}
+            aria-label={`Ver más sobre ${plan.producto}`}
+            className={`mt-4 inline-flex items-center justify-center gap-2 self-center py-1.5 text-[15px] font-semibold ${plan.texto} hover:opacity-70`}
+          >
+            {plan.verMas}
+            <span aria-hidden="true">→</span>
+          </a>
+        )}
       </div>
     </motion.article>
   )
