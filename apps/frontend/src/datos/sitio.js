@@ -35,7 +35,7 @@ export const PREGUNTAS = [
   ['¿Cómo se paga?', '50 % al empezar y 50 % al entregar. El proceso arranca cuando recibimos el primer pago y la información que necesitamos para empezar.'],
   ['¿Cuánto tarda?', 'Una landing page lleva entre 3 y 4 semanas, un sitio autoadministrable entre 5 y 7, y una web a medida o tienda online desde 8 semanas. La fecha exacta te la damos en la propuesta.'],
   ['¿Qué tengo que tener listo?', 'Saber qué hace tu negocio y a quién le vende. Si ya tenés logo, textos y fotos, mejor; si te falta algo, lo vemos juntos en la charla.'],
-  ['¿Voy a poder cambiar cosas yo?', 'Sí, con los planes Profesional y A medida: incluyen un panel simple para cambiar textos y fotos, y te enseñamos a usarlo. En la landing page (plan Estática) los cambios los hacemos nosotros.'],
+  ['¿Voy a poder cambiar cosas yo?', 'Sí, con los planes Profesional y A Medida: incluyen un panel simple para cambiar textos y fotos, y te enseñamos a usarlo. En la landing page (plan Estática) los cambios los hacemos nosotros.'],
   ['¿Trabajan con gente de otras ciudades o países?', 'Sí. Trabajamos desde Mar del Plata para todo el mundo. Todo el proceso se hace a distancia.'],
   ['¿Usan plantillas?', 'No. Cada web se diseña y se programa desde cero para tu negocio, y la pensamos los dos juntos desde el primer boceto.'],
 ]

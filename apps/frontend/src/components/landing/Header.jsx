@@ -11,9 +11,9 @@ export default function Header({ ruta = '/' }) {
   const enHome = ruta === '/'
   const ir = (ancla) => (enHome ? ancla : `/${ancla}`)
 
-  // Servicios: los tres planes y Diseño (que por ahora es una sección de la home).
+  // Servicios: los tres planes (con el nombre del plan) y Diseño (que por ahora es una sección de la home).
   const servicios = [
-    ...PLANES.map((p) => ({ texto: p.producto, href: p.ruta })),
+    ...PLANES.map((p) => ({ texto: `Plan ${p.nombre}`, href: p.ruta })),
     { texto: 'Diseño', href: ir('#diseno') },
   ]
   const links = [

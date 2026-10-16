@@ -100,7 +100,7 @@ export const PLANES = [
     id: 'a-medida',
     ruta: '/tienda-online/',
     etiqueta: 'Dinámica · ecommerce',
-    nombre: 'A medida',
+    nombre: 'A Medida',
     producto: 'Tienda online',
     verMas: 'Ver más',
     bajada: 'Tu tienda o tu sistema, pensado y programado desde cero.',
