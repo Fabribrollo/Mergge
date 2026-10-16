@@ -41,7 +41,7 @@ export function TituloEnLineas({ lineas, as = 'h2', className = '', claseLinea =
   return (
     <Etiqueta ref={ref} className={className}>
       {/* Antetítulo opcional: una línea chica arriba, dentro del mismo título
-          (así Google lee "Estudio de diseño y desarrollo web · Tu web pensada…"). */}
+          (así Google lee "Estudio de Diseño y Desarrollo Web ·Tu web pensada…"). */}
       {antetitulo && (
         <>
           <motion.span

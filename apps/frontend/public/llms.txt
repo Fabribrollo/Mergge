@@ -1,6 +1,6 @@
 # Mergge Studio
 
-> Estudio de diseño y desarrollo web de Argentina, con base en Mar del Plata. Hace páginas web a medida para emprendedores y pymes de todo el mundo. Diseño y código los hacen las mismas dos personas, en un mismo proceso.
+> Estudio de Diseño y Desarrollo Web de Argentina, con base en Mar del Plata. Hace páginas web a medida para emprendedores y pymes de todo el mundo. Diseño y código los hacen las mismas dos personas, en un mismo proceso.
 
 - Sitio: https://mergge.com.ar
 - Email: contacto@mergge.com.ar

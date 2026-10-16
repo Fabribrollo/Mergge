@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, MotionConfig, useScroll, useTransform } from 'motion/react'
 import Estrella from '../landing/ui/Estrella.jsx'
+import Flecha from '../landing/ui/Flecha.jsx'
 import { Revelar, TituloEnLineas } from '../landing/ui/Revelar.jsx'
 import { alAparecer, dur, ease } from '../landing/ui/movimiento.js'
 import { Tarjeta } from '../landing/Planes.jsx'
@@ -58,7 +59,7 @@ export default function Precio({ plan, paraVos }) {
               lineas={[{ texto: 'Cuánto' }, { texto: 'cuesta', contorno: true }]}
             />
             <Revelar as="p" className="mt-7 max-w-[560px] text-base leading-[1.55] text-mg-crema/90 md:text-lg">
-              En dólares, según el alcance final: después de la charla te pasamos un presupuesto cerrado. Pagás 50&nbsp;% al empezar y 50&nbsp;% al entregar. Desde el
+              Según el alcance final: después de la charla te pasamos un presupuesto cerrado. Pagás 50&nbsp;% al empezar y 50&nbsp;% al entregar. Desde el
               segundo año, el dominio y el alojamiento se renuevan&nbsp;aparte.
             </Revelar>
 
@@ -93,7 +94,7 @@ export default function Precio({ plan, paraVos }) {
                       </span>
                     </span>
                     <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-mg-naranja text-lg text-mg-marron" aria-hidden="true">
-                      →
+                      <Flecha />
                     </span>
                   </motion.a>
                 ))}

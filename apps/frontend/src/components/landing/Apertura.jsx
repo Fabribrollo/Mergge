@@ -87,7 +87,7 @@ export default function Apertura() {
               activo={entraTexto}
               className="relative font-titulo text-[20vw] uppercase leading-[0.88] tracking-[-0.01em] text-mg-crema md:text-[clamp(96px,10.8vw,156px)] md:leading-[0.86] [--trazo:1.8px] md:[--trazo:2.5px]"
               lineas={[{ texto: 'Tu web' }, { texto: 'pensada' }, { texto: 'desde cero', contorno: true }]}
-              antetitulo="Estudio de diseño y desarrollo web"
+              antetitulo="Estudio de Diseño y Desarrollo Web"
               claseAntetitulo="mb-4 font-texto text-[15px] font-semibold normal-case leading-snug tracking-[0.01em] text-mg-crema/85 md:mb-6 md:text-xl"
             />
           </div>

@@ -8,7 +8,7 @@ import { alAparecer, dur, ease, resorte, stagger } from './ui/movimiento.js'
 import useEsCompu from './ui/useEsCompu.js'
 
 const SERVICIOS = [
-  { nombre: 'Diseño', desc: 'Definimos qué transmite tu marca, cómo habla y qué la hace distinta.' },
+  { nombre: 'Branding', desc: 'Definimos qué transmite tu marca, cómo habla y qué la hace distinta.' },
   { nombre: 'Identidad visual', desc: 'Logo, colores, tipografías y el manual para usarlos bien en todos lados.' },
   { nombre: 'Redes sociales', desc: 'Plantillas y piezas con tu identidad, listas para publicar.' },
   { nombre: 'Packaging', desc: 'Etiquetas, cajas y envases que se reconocen de un vistazo.' },

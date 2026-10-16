@@ -1,5 +1,6 @@
 import { motion, MotionConfig } from 'motion/react'
 import Estrella from '../landing/ui/Estrella.jsx'
+import Flecha from '../landing/ui/Flecha.jsx'
 import { Revelar, TituloEnLineas } from '../landing/ui/Revelar.jsx'
 import { alAparecer, dur, ease, stagger } from '../landing/ui/movimiento.js'
 import { PLANES, RASGOS } from '../../datos/planes.js'
@@ -37,7 +38,7 @@ export default function QueEs({ plan, contenido }) {
               lineas={contenido.titulo}
             />
             <Revelar as="p" className="max-w-[480px] text-[17px] leading-[1.5] md:text-xl">
-              {contenido.definicion} Así se ubica al lado de los otros&nbsp;planes:
+              {contenido.definicion}
             </Revelar>
           </div>
 
@@ -87,7 +88,7 @@ export default function QueEs({ plan, contenido }) {
                     </ul>
                     {!actual && (
                       <a href={p.ruta} className="mt-auto inline-flex items-center gap-2 self-start pt-2 text-[15px] font-semibold hover:opacity-70">
-                        Ver el plan <span aria-hidden="true">→</span>
+                        Ver el plan <Flecha />
                       </a>
                     )}
                   </article>

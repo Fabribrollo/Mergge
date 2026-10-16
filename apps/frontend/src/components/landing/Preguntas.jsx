@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, MotionConfig, useAnimate, useInView } from 'motion/react'
 import Estrella from './ui/Estrella.jsx'
 import Orbita from './ui/Orbita.jsx'
+import Flecha from './ui/Flecha.jsx'
 import { Revelar, TituloEnLineas } from './ui/Revelar.jsx'
 import { resorte as resorteGeneral } from './ui/movimiento.js'
 import useEsCompu from './ui/useEsCompu.js'
@@ -239,7 +240,7 @@ export default function Preguntas({ preguntas = PREGUNTAS, fondo = FONDO_HOME, a
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
-                Escribinos <span aria-hidden="true">→</span>
+                Escribinos <Flecha />
               </motion.a>
             </div>
           </motion.div>

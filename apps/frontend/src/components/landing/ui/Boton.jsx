@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { dur } from './movimiento.js'
+import Flecha from './Flecha.jsx'
 
 // Botón píldora. Variantes: 'naranja' (principal), 'contorno' (secundario sobre color),
 // 'marron' (principal sobre naranja o crema), 'crema' (principal sobre azul) y
@@ -24,7 +25,7 @@ export default function Boton({ href = '#', variante = 'naranja', className = ''
     >
       {children}
       <span className="text-lg leading-none transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">
-        →
+        <Flecha />
       </span>
     </motion.a>
   )

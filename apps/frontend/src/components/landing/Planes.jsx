@@ -1,6 +1,7 @@
 import { motion, MotionConfig } from 'motion/react'
 import Estrella from './ui/Estrella.jsx'
 import Boton from './ui/Boton.jsx'
+import Flecha from './ui/Flecha.jsx'
 import { Revelar, TituloEnLineas } from './ui/Revelar.jsx'
 import { alAparecer, dur, ease, stagger } from './ui/movimiento.js'
 import { PLANES } from '../../datos/planes.js'
@@ -123,7 +124,7 @@ export function Tarjeta({ plan, sinBajada = false, sinLink = false, className = 
             className={`mt-4 inline-flex items-center justify-center gap-2 self-center py-1.5 text-[15px] font-semibold ${plan.texto} hover:opacity-70`}
           >
             {plan.verMas}
-            <span aria-hidden="true">→</span>
+            <Flecha />
           </a>
         )}
       </div>

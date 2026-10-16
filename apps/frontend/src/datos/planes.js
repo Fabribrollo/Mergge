@@ -136,9 +136,9 @@ export const PAGINAS_PLAN = {
         'Landing Page diseñada desde cero: rápida en el celular, visible en Google y lista en 3 a 4 semanas. Desde USD 400. Pedí tu presupuesto.',
     },
     apertura: {
-      antetitulo: 'Landing Page a medida · plan Estática',
+      antetitulo: 'Landing Page a medida · Plan Estática',
       titulo: [{ texto: 'Landing Page' }, { texto: 'a medida', contorno: true }],
-      bajada: nb('Una página diseñada desde cero para que te encuentren y te escriban.'),
+      bajada: nb('Una página diseñada desde cero, para que te encuentren y te escriban.'),
     },
     queEs: {
       titulo: [{ texto: '¿Qué es una' }, { texto: 'Landing Page?', contorno: true }],
@@ -147,7 +147,7 @@ export const PAGINAS_PLAN = {
     },
     incluye: {
       titulo: [{ texto: 'Qué incluye' }, { texto: 'tu Landing Page', contorno: true }],
-      intro: nb('Todo lo que necesitás para estar en internet con una presencia seria, en una sola página bien pensada.'),
+      intro: nb('Una presencia online profesional y efectiva. Todo lo que tu marca necesita para destacar, resuelto en una sola página pensada al detalle.'),
       yaIncluido: null,
       tarjetas: [
         { col: 3, piel: 'cremaAzul', visual: 'teEscriben', titulo: 'Pensada para que te escriban', texto: 'Cada sección lleva al mismo lugar: tu WhatsApp, tu mail o un formulario, lo que te quede más cómodo.' },
@@ -180,7 +180,7 @@ export const PAGINAS_PLAN = {
         'Sitio web a medida con panel de edición: cambiás textos y fotos vos, sin saber programar. De USD 800 a 1.200, en 5 a 7 semanas.',
     },
     apertura: {
-      antetitulo: 'Sitio web autoadministrable · plan Profesional',
+      antetitulo: 'Sitio web autoadministrable · Plan Profesional',
       titulo: [{ texto: 'Tu web' }, { texto: 'la editás vos', contorno: true }],
       bajada: nb('Un sitio a medida que actualizás vos, cuando quieras.'),
     },
@@ -192,7 +192,7 @@ export const PAGINAS_PLAN = {
     },
     incluye: {
       titulo: [{ texto: 'Qué incluye' }, { texto: 'tu sitio', contorno: true }],
-      intro: nb('Todo lo que trae la Landing Page, más un panel para editarla vos y más trabajo para que te encuentren en Google.'),
+      intro: nb('Todo lo de la Landing, pero con un panel súper fácil para que edites tu info cuando quieras, más un refuerzo en SEO para aparecer en las búsquedas de Google.'),
       yaIncluido: BASE,
       tarjetas: [
         { col: 8, piel: 'crema', visual: 'panel', titulo: 'Panel de edición', texto: 'Cambiás textos y fotos desde un panel simple, sin tocar código y sin esperar a nadie.' },
@@ -231,7 +231,7 @@ export const PAGINAS_PLAN = {
         'Tienda online diseñada y programada desde cero: catálogo, pagos online y gestión de ventas. Desde USD 1.400. Pedí tu presupuesto.',
     },
     apertura: {
-      antetitulo: 'Tienda online a medida · plan A medida',
+      antetitulo: 'Tienda online a medida · Plan A Medida',
       titulo: [{ texto: 'Tienda online' }, { texto: 'a medida', contorno: true }],
       bajada: nb('Tu tienda diseñada y programada desde cero, lista para vender.'),
     },
@@ -242,7 +242,7 @@ export const PAGINAS_PLAN = {
     },
     incluye: {
       titulo: [{ texto: 'Qué incluye' }, { texto: 'tu tienda', contorno: true }],
-      intro: nb('Todo lo que traen la Landing Page y el sitio autoadministrable, más lo que hace falta para vender: catálogo, pagos y pedidos.'),
+      intro: nb('Todo el diseño y control del sitio autoadministrable, integrado con las herramientas clave para vender 24/7. Incluye tu catálogo, métodos de pago y sistema de pedidos, listos desde el primer día.'),
       yaIncluido: [...BASE, 'Panel de edición', 'Mejor posición en Google'],
       tarjetas: [
         { col: 7, piel: 'azul', visual: 'pago', titulo: 'Pagos online', texto: 'Tus clientes compran y pagan desde la web, a cualquier hora.' },

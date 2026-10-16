@@ -87,7 +87,7 @@ export default function Quienes() {
             >
               Mergge existe para transformar ideas en experiencias digitales que conectan marcas con personas. Somos
               Delfina (Lic. en Diseño Gráfico y UX/UI Designer) y Fabrizio (Desarrollador Web Full Stack).
-              Trabajamos desde Mar del Plata para todo el&nbsp;mundo.
+              Trabajamos para todo el&nbsp;mundo.
             </Revelar>
           </div>
         </div>

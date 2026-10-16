@@ -8,7 +8,7 @@ export const SITIO = {
   nombre: 'Mergge Studio',
   nombreCorto: 'Mergge',
   descripcion:
-    'Estudio de diseño y desarrollo web en Argentina. Páginas a medida para emprendedores y pymes de todo el mundo, con precios claros desde USD 400.',
+    'Estudio de Diseño y Desarrollo Web en Argentina. Páginas a medida para emprendedores y pymes de todo el mundo, con precios claros desde USD 400.',
   email: 'contacto@mergge.com.ar',
   telefono: '+54 9 2235 90-9949', // como se muestra
   telefonoE164: '+5492235909949', // como lo leen las máquinas (sin espacios)
