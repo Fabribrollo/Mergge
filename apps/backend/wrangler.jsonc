@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "backend",
   "main": "src/index.ts",
-  "compatibility_date": "2026-09-08"
+  "compatibility_date": "2026-09-08",
   // "compatibility_flags": [
   //   "nodejs_compat"
   // ],
@@ -21,13 +21,19 @@
   //     "bucket_name": "my-bucket"
   //   }
   // ],
-  // "d1_databases": [
-  //   {
-  //     "binding": "MY_DB",
-  //     "database_name": "my-database",
-  //     "database_id": ""
-  //   }
-  // ],
+  // La API se publica en api.mergge.com.ar. Wrangler crea el registro DNS solo
+  // (la zona mergge.com.ar tiene que estar en esta cuenta de Cloudflare).
+  "routes": [
+    { "pattern": "api.mergge.com.ar", "custom_domain": true, "zone_name": "mergge.com.ar" }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "mergge-leads",
+      "database_id": "f632abbf-d62a-48b9-aeeb-f85dacbbd645",
+      "migrations_dir": "migrations"
+    }
+  ],
   // "ai": {
   //   "binding": "AI"
   // },

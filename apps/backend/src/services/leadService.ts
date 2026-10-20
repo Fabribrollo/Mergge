@@ -1,4 +1,3 @@
-import { createClient } from '@supabase/supabase-js'
 import { leadSchema, type Lead } from 'shared'
 import { Bindings } from '../bindings'
 
@@ -23,31 +22,39 @@ export default async function createLead(body: unknown, env: Bindings): Promise<
 
   const { token: _token, website: _website, ...data } = parsed.data
 
-  const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_SECRET)
-
-  const { error } = await supabase.from('leads').insert({
-    nombre: data.nombre,
-    empresa: data.empresa,
-    rubro: data.rubro,
-    email: data.email,
-    whatsapp: data.whatsapp,
-    web_actual: data.webActual,
-    links: data.links,
-    problemas: data.problemas,
-    objetivos: data.objetivos,
-    tipo_proyecto: data.tipoProyecto,
-    autogestion: data.autogestion,
-    material: data.material,
-    plazo: data.plazo,
-    presupuesto: data.presupuesto,
-    decisor: data.decisor,
-    como_llego: data.comoLlego,
-    valora: data.valora,
-    comentario: data.comentario,
-  })
-
-  if (error) {
-    console.error('Error insertando lead en Supabase:', error)
+  // D1 no acepta `undefined` en bind (los opcionales que no vinieron) → null.
+  // Los arrays se guardan como JSON en texto.
+  try {
+    await env.DB.prepare(
+      `INSERT INTO leads (
+        nombre, empresa, rubro, email, whatsapp, web_actual, links,
+        problemas, objetivos, tipo_proyecto, autogestion, material,
+        plazo, presupuesto, decisor, como_llego, valora, comentario
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    )
+      .bind(
+        data.nombre,
+        data.empresa,
+        data.rubro ?? null,
+        data.email,
+        data.whatsapp ?? null,
+        data.webActual ?? null,
+        data.links ?? null,
+        JSON.stringify(data.problemas),
+        JSON.stringify(data.objetivos),
+        data.tipoProyecto ?? null,
+        data.autogestion ?? null,
+        data.material ?? null,
+        data.plazo ?? null,
+        data.presupuesto ?? null,
+        data.decisor ?? null,
+        data.comoLlego ?? null,
+        JSON.stringify(data.valora),
+        data.comentario ?? null
+      )
+      .run()
+  } catch (error) {
+    console.error('Error insertando lead en D1:', error)
     return { success: false, status: 500, error: 'No pudimos guardar tu consulta' }
   }
 

@@ -284,8 +284,20 @@ export default function FormularioContacto() {
           )}
 
           {esUltimoPaso && (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-3">
               <div ref={turnstileRef} />
+              <p className="text-[13px] leading-[1.5] text-mg-marron-tenue">
+                Al enviar aceptás nuestra{' '}
+                <a
+                  href="/privacidad"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-mg-marron underline underline-offset-2"
+                >
+                  política de privacidad
+                </a>
+                .
+              </p>
             </div>
           )}
 

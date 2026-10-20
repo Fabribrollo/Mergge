@@ -217,6 +217,10 @@ export default function Cierre({
                   <span>Diseño y desarrollo web en {SITIO.ciudad}, Argentina</span>
                   <Separador />
                   <span>© 2026 {SITIO.nombre}</span>
+                  <Separador />
+                  <a href="/privacidad" className="hover:text-mg-marron">
+                    Privacidad
+                  </a>
                 </p>
               </div>
             </div>

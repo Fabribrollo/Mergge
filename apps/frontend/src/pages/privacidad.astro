@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { SITIO } from '../datos/sitio.js'
+
+// Política de privacidad. Es texto corrido: va en Astro puro (sin islas de
+// React) para que cargue al instante. Si cambia algo de lo que hace el sitio
+// con los datos (formulario, proveedores, medición), se actualiza acá.
+const actualizado = '20 de octubre de 2026'
+
+const datosFormulario = [
+  'nombre y nombre de tu empresa o proyecto',
+  'rubro o a qué se dedican',
+  'email y WhatsApp',
+  'web actual y links que quieras compartir',
+  'lo que respondas sobre tu proyecto: problemas, objetivos, tipo de proyecto, plazo, presupuesto, quién decide, cómo nos conociste y qué valorás',
+  'el comentario libre, si lo completás',
+]
+
+const proveedores = [
+  ['Cloudflare', 'aloja la API del sitio y la base de datos donde se guardan las respuestas del formulario, y verifica con Turnstile que quien envía es una persona.'],
+  ['Resend', 'envía el mail interno que nos avisa que llegó una consulta.'],
+  ['Vercel', 'aloja las páginas del sitio.'],
+  ['Umami', 'mide visitas y clics sin cookies (ver más abajo).'],
+]
+---
+
+<Layout
+  title="Política de privacidad - Mergge Studio"
+  description="Qué datos personales pedimos en el formulario de Mergge Studio, para qué los usamos, dónde se guardan y cómo pedirnos que los corrijamos o borremos."
+>
+  <main class="min-h-svh bg-mg-crema px-[22px] pb-20 pt-8 font-texto text-mg-marron md:px-[50px] md:pt-10">
+    <div class="mx-auto w-full max-w-[760px]">
+      <a href="/" aria-label="Mergge Studio — inicio" class="inline-block">
+        <img src="/marca/logo-marron.png" alt="Mergge Studio" class="h-[17px] w-auto md:h-[22px]" width="133" height="20" />
+      </a>
+
+      <h1 class="mt-14 font-titulo text-[clamp(40px,9vw,76px)] uppercase leading-[0.95]">Política de privacidad</h1>
+      <p class="mt-4 text-sm text-mg-marron-tenue">Última actualización: {actualizado}</p>
+
+      <div class="mt-10 flex flex-col gap-10 text-[16px] leading-[1.65] text-mg-marron-suave md:text-[17px]">
+        <section>
+          <h2 class="mb-3 font-titulo text-[28px] uppercase leading-none text-mg-marron">Quién es responsable</h2>
+          <p>
+            {SITIO.nombre} es responsable de los datos que nos dejás en este sitio. Para cualquier consulta sobre ellos
+            escribinos a <a href={`mailto:${SITIO.email}`} class="font-semibold text-mg-azul underline underline-offset-2">{SITIO.email}</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 font-titulo text-[28px] uppercase leading-none text-mg-marron">Qué datos pedimos</h2>
+          <p class="mb-3">Solo los que nos dejás vos en el formulario de contacto (<span class="font-semibold">/form</span>):</p>
+          <ul class="list-disc space-y-1.5 pl-6">
+            {datosFormulario.map((d) => <li>{d}</li>)}
+          </ul>
+          <p class="mt-3">No pedimos datos de pago ni documentos de identidad. Tampoco usamos cookies de publicidad.</p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 font-titulo text-[28px] uppercase leading-none text-mg-marron">Para qué los usamos</h2>
+          <p>
+            Para contactarte, entender qué necesitás y llegar a la primera charla con ideas concretas. Si trabajamos
+            juntos, para armar la propuesta y llevar adelante el proyecto. No vendemos tus datos ni los usamos para
+            enviarte publicidad de terceros.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 font-titulo text-[28px] uppercase leading-none text-mg-marron">Dónde se guardan y quién los procesa</h2>
+          <p class="mb-3">Para que el sitio funcione usamos estos servicios:</p>
+          <ul class="space-y-2">
+            {proveedores.map(([nombre, texto]) => <li><span class="font-semibold text-mg-marron">{nombre}:</span> {texto}</li>)}
+          </ul>
+          <p class="mt-3">
+            Algunos de estos proveedores procesan datos en servidores fuera de la Argentina. Solo los usamos para lo
+            que se indica arriba y no compartimos tus datos con nadie más, salvo que una autoridad competente nos lo
+            exija.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 font-titulo text-[28px] uppercase leading-none text-mg-marron">Medición del sitio</h2>
+          <p>
+            Medimos las visitas y los clics en los botones de contacto con Umami, una herramienta que no usa cookies ni
+            guarda datos que te identifiquen. En el formulario solo registramos hasta qué paso llegó cada persona, nunca
+            lo que escribió.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 font-titulo text-[28px] uppercase leading-none text-mg-marron">Tus derechos</h2>
+          <p>
+            Podés pedirnos en cualquier momento ver los datos que tenemos tuyos, corregirlos o que los borremos.
+            Escribinos a <a href={`mailto:${SITIO.email}`} class="font-semibold text-mg-azul underline underline-offset-2">{SITIO.email}</a> y
+            te respondemos a la brevedad. Conservamos tus datos mientras sea necesario para responderte y, si
+            trabajamos juntos, durante la relación comercial.
+          </p>
+          <p class="mt-3 text-[15px] text-mg-marron-tenue">
+            La Agencia de Acceso a la Información Pública, en su carácter de Órgano de Control de la Ley 25.326, tiene la
+            atribución de atender las denuncias y reclamos de quienes resulten afectados en sus derechos por
+            incumplimiento de las normas de protección de datos personales.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 font-titulo text-[28px] uppercase leading-none text-mg-marron">Cambios en esta política</h2>
+          <p>Si cambiamos algo de lo que hacemos con los datos, actualizamos esta página y la fecha de arriba.</p>
+        </section>
+      </div>
+
+      <a href="/" class="mt-14 inline-flex min-h-12 items-center rounded-sm border-2 border-mg-marron px-6 text-[13px] font-semibold uppercase tracking-[0.08em] text-mg-marron hover:bg-mg-marron hover:text-mg-crema">
+        Volver al inicio
+      </a>
+    </div>
+  </main>
+</Layout>
