@@ -1,5 +1,5 @@
-// Configuración de los 5 pasos del formulario, en el mismo orden y con el mismo
-// texto que el diseño aprobado (Main.dc.html). Cada `name` coincide exactamente
+// Configuración de los 5 capítulos del formulario, en el mismo orden y con el mismo
+// texto que el diseño aprobado (variante "bandas", 2026-10-20). Cada `name` coincide exactamente
 // con un campo de `leadSchema` (packages/shared/src/index.ts), así que este
 // archivo es el único lugar donde hay que tocar algo si cambia una pregunta.
 //
@@ -8,15 +8,22 @@
 //   'textarea' -> <textarea>
 //   'opciones' -> botones de selección, modo 'single' (una opción) o 'multi'
 //                 (varias, con `max` opcional). `variante` define el look:
-//                 'circulo' | 'cuadrado' | 'pildora'.
+//                 'circulo' (fila con círculo, frases largas) | 'cuadrado'
+//                 (tarjeta, para elegir varias) | 'pildora' (opción corta).
+//
+// Cada capítulo tiene `lineas` (el título, una por renglón; la última sale en
+// contorno), `subtitulo` y `tituloCorto` (el que se ve arriba, en el avance).
+// No hay textos de ayuda al lado de las preguntas; la única aclaración es la
+// `nota` del presupuesto (campo `destacado`, en recuadro aparte).
 //
 // Un campo dentro de un array (en vez de directamente en `campos`) se agrupa
-// en una misma fila (dos columnas en desktop) — así están email/whatsapp y
-// autogestión/material en el diseño original.
+// en una misma fila (dos columnas en compu) — así están email y whatsapp.
 
 export const PASOS = [
   {
     titulo: 'Quién sos',
+    lineas: ['Quién', 'sos'],
+    subtitulo: 'Lo básico para poder escribirte.',
     tituloCorto: 'Quién sos',
     campos: [
       {
@@ -61,8 +68,10 @@ export const PASOS = [
     ],
   },
   {
-    titulo: 'Dónde estás parado hoy',
-    tituloCorto: 'Tu presencia online',
+    titulo: 'Situación actual',
+    lineas: ['Situación', 'actual'],
+    subtitulo: 'Dónde estás parado hoy.',
+    tituloCorto: 'Situación actual',
     campos: [
       {
         tipo: 'opciones',
@@ -81,7 +90,6 @@ export const PASOS = [
         tipo: 'textarea',
         name: 'links',
         label: 'Si tenés web o redes, pegá los links acá',
-        ayuda: 'opcional',
         placeholder: 'Nos sirve para llegar a la reunión con el diagnóstico hecho',
         filas: 2,
       },
@@ -89,7 +97,6 @@ export const PASOS = [
         tipo: 'opciones',
         name: 'problemas',
         label: '¿Qué es lo que hoy no te está funcionando?',
-        ayuda: 'elegí las que quieras',
         modo: 'multi',
         variante: 'cuadrado',
         opciones: [
@@ -104,7 +111,9 @@ export const PASOS = [
     ],
   },
   {
-    titulo: 'Hablemos del proyecto',
+    titulo: 'El proyecto',
+    lineas: ['El', 'proyecto'],
+    subtitulo: 'Qué querés lograr y qué tipo de web te imaginás.',
     tituloCorto: 'El proyecto',
     campos: [
       {
@@ -136,37 +145,36 @@ export const PASOS = [
           'No estoy seguro, quiero asesoramiento',
         ],
       },
-      [
-        {
-          tipo: 'opciones',
-          name: 'autogestion',
-          label: '¿Vas a querer editar los contenidos vos mismo?',
-          modo: 'single',
-          variante: 'circulo',
-          opciones: [
-            'Sí, quiero cambiar cosas seguido',
-            'De vez en cuando, cambios chicos',
-            'No, prefiero que lo manejen ustedes',
-          ],
-        },
-        {
-          tipo: 'opciones',
-          name: 'material',
-          label: '¿Tenés listo el material?',
-          ayuda: 'logo, textos, fotos',
-          modo: 'single',
-          variante: 'circulo',
-          opciones: [
-            'Sí, tengo todo listo',
-            'Tengo algunas cosas, otras no',
-            'No tengo nada, necesito ayuda',
-          ],
-        },
-      ],
+      {
+        tipo: 'opciones',
+        name: 'autogestion',
+        label: '¿Vas a querer editar los contenidos vos mismo?',
+        modo: 'single',
+        variante: 'circulo',
+        opciones: [
+          'Sí, quiero cambiar cosas seguido',
+          'De vez en cuando, cambios chicos',
+          'No, prefiero que lo manejen ustedes',
+        ],
+      },
+      {
+        tipo: 'opciones',
+        name: 'material',
+        label: '¿Tenés listo el material?',
+        modo: 'single',
+        variante: 'circulo',
+        opciones: [
+          'Sí, tengo todo listo',
+          'Tengo algunas cosas, otras no',
+          'No tengo nada, necesito ayuda',
+        ],
+      },
     ],
   },
   {
-    titulo: 'Cómo nos organizamos',
+    titulo: 'Tiempos y presupuesto',
+    lineas: ['Tiempos y', 'presupuesto'],
+    subtitulo: 'Cómo nos organizamos.',
     tituloCorto: 'Tiempos y presupuesto',
     campos: [
       {
@@ -187,8 +195,7 @@ export const PASOS = [
         tipo: 'opciones',
         name: 'presupuesto',
         label: '¿Qué presupuesto tenés pensado destinarle?',
-        ayuda:
-          'No es un compromiso ni una cotización — nos sirve para proponerte algo realista y no hacerte perder el tiempo.',
+        nota: 'No es un compromiso ni una cotización. Nos sirve para proponerte algo realista y no hacerte perder el tiempo.',
         modo: 'single',
         variante: 'cuadrado',
         destacado: true,
@@ -212,7 +219,9 @@ export const PASOS = [
     ],
   },
   {
-    titulo: 'Para conocernos mejor',
+    titulo: 'Para conocernos',
+    lineas: ['Para', 'conocernos'],
+    subtitulo: 'Último capítulo, y listo.',
     tituloCorto: 'Para conocernos',
     campos: [
       {
@@ -227,7 +236,6 @@ export const PASOS = [
         tipo: 'opciones',
         name: 'valora',
         label: '¿Qué es lo que más valorás al elegir con quién trabajar?',
-        ayuda: 'hasta 2',
         modo: 'multi',
         variante: 'cuadrado',
         max: 2,
@@ -243,7 +251,6 @@ export const PASOS = [
         tipo: 'textarea',
         name: 'comentario',
         label: '¿Algo más que quieras contarnos?',
-        ayuda: 'opcional',
         placeholder: 'Una referencia que te guste, una idea suelta, una duda. Todo suma.',
         filas: 3,
       },

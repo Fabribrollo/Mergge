@@ -1,5 +1,6 @@
 ---
 import '../styles/mergge.css'
+import '../styles/formulario.css'
 import '@fontsource/anton/latin-400.css'
 import '@fontsource/poppins/latin-400.css'
 import '@fontsource/poppins/latin-500.css'
@@ -41,6 +42,13 @@ const imagenUrl = new URL(SITIO.imagenOg, Astro.site)
          así que no hace falta bloquear nada acá. -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <Medicion />
+    <!-- El fondo de la página es el marrón del formulario: sin destellos blancos si el contenido tarda. -->
+    <style is:global>
+      html,
+      body {
+        background: #310d00;
+      }
+    </style>
   </head>
   <body>
     <main>

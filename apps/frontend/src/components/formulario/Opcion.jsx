@@ -1,24 +1,39 @@
-// Un botón de opción reutilizable. `variante` decide cómo se ve la "marca"
-// de selección: círculo (radio), cuadrado (checkbox) o píldora (sin marca,
-// el fondo azul alcanza para mostrar que está elegida).
+import Estrella from '../landing/ui/Estrella.jsx'
+
+const MARCA = { width: 16, height: 16, display: 'block' }
+
+// Un botón de opción. Tres formas, según `variante` (viene de pasos.js):
+//   'pildora'  -> una opción corta (elegida: naranja)
+//   'cuadrado' -> tarjeta para elegir varias: estrella en contorno que se llena al elegir
+//   'circulo'  -> fila con círculo, para frases largas de opción única
 export default function Opcion({ label, activo, onClick, variante = 'circulo' }) {
-  const esPildora = variante === 'pildora'
+  const base = `fm-op ${activo ? 'on ' : ''}`
 
-  const clases = [
-    'flex min-h-12 cursor-pointer items-center gap-3 rounded-sm border-2 px-4 text-left font-texto text-sm font-medium text-mg-marron',
-    activo ? 'border-mg-azul bg-mg-seleccion-fondo' : 'border-mg-linea bg-white hover:border-[#a2947f]',
-    esPildora ? 'w-fit justify-center rounded-full' : '',
-  ]
+  if (variante === 'pildora') {
+    return (
+      <button type="button" className={`${base}fm-pl`} onClick={onClick} aria-pressed={activo}>
+        {label}
+      </button>
+    )
+  }
 
-  const claseMarca = [
-    'h-[17px] w-[17px] flex-none border-2',
-    variante === 'cuadrado' ? 'rounded-[3px]' : 'rounded-full shadow-[inset_0_0_0_3px_#ffffff]',
-    activo ? 'border-mg-azul bg-mg-azul' : 'border-[#b8ae99] bg-white',
-  ].join(' ')
+  if (variante === 'cuadrado') {
+    return (
+      <button type="button" className={`${base}fm-cd`} onClick={onClick} aria-pressed={activo}>
+        <span className="no" style={{ opacity: 0.6 }} aria-hidden="true">
+          <Estrella contorno color="currentColor" style={MARCA} />
+        </span>
+        <span className="si" aria-hidden="true">
+          <Estrella color="currentColor" style={MARCA} />
+        </span>
+        <span>{label}</span>
+      </button>
+    )
+  }
 
   return (
-    <button type="button" className={clases.join(' ')} onClick={onClick} aria-pressed={activo}>
-      {!esPildora && <span className={claseMarca} aria-hidden="true" />}
+    <button type="button" className={`${base}fm-rd`} onClick={onClick} aria-pressed={activo}>
+      <i aria-hidden="true" />
       <span>{label}</span>
     </button>
   )

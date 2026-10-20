@@ -1,47 +1,50 @@
 import Opcion from './Opcion.jsx'
+import Estrella from '../landing/ui/Estrella.jsx'
 
 // Renderiza UN campo del formulario según su `tipo`. No sabe nada de "paso 3"
 // ni de Turnstile — solo sabe leer `campo` (viene de pasos.js), mostrar el
 // valor actual y avisar cuando cambia, vía `onChange(name, nuevoValor)`.
 export default function Campo({ campo, valor, onChange, error }) {
-  const { tipo, name, label, ayuda, requerido } = campo
+  const { tipo, name, label, requerido } = campo
+  const idError = `${name}-error`
 
-  const claseInput = `w-full rounded-sm border-2 bg-white px-4 py-3.5 font-texto text-base text-mg-marron placeholder:text-[#a2947f] focus:outline-none focus:ring-3 ${
-    error
-      ? 'border-mg-naranja focus:border-mg-naranja focus:ring-mg-naranja/16'
-      : 'border-mg-linea focus:border-mg-azul focus:ring-mg-azul/16'
-  }`
+  const mensaje = error && (
+    <div className="fm-msg" id={idError} aria-live="polite">
+      <Estrella color="#FF4500" style={{ width: 13, height: 13, display: 'block' }} />
+      <span>{error}</span>
+    </div>
+  )
 
   if (tipo === 'input' || tipo === 'textarea') {
+    const comunes = {
+      id: name,
+      name,
+      className: `fm-inp${error ? ' error' : ''}`,
+      placeholder: campo.placeholder,
+      value: valor ?? '',
+      required: !!requerido,
+      'aria-required': requerido ? true : undefined,
+      'aria-invalid': !!error,
+      'aria-describedby': error ? idError : undefined,
+      onChange: (e) => onChange(name, e.target.value),
+    }
+
     return (
-      <div className="flex flex-col gap-2.5">
-        <label htmlFor={name} className="font-texto text-[15px] font-semibold text-mg-marron">
-          {label} {requerido && <span className="text-mg-naranja">*</span>}
-          {ayuda && !requerido && <span className="font-normal text-mg-marron-tenue"> — {ayuda}</span>}
+      <div className="fm-cp">
+        <label className="fm-lb" htmlFor={name}>
+          {label}
+          {requerido && (
+            <span className="fm-ast" aria-hidden="true">
+              *
+            </span>
+          )}
         </label>
         {tipo === 'textarea' ? (
-          <textarea
-            id={name}
-            name={name}
-            className={claseInput}
-            rows={campo.filas || 3}
-            placeholder={campo.placeholder}
-            value={valor ?? ''}
-            onChange={(e) => onChange(name, e.target.value)}
-            aria-invalid={!!error}
-          />
+          <textarea {...comunes} rows={campo.filas || 3} />
         ) : (
-          <input
-            id={name}
-            name={name}
-            className={claseInput}
-            type={campo.inputType || 'text'}
-            placeholder={campo.placeholder}
-            value={valor ?? ''}
-            onChange={(e) => onChange(name, e.target.value)}
-            aria-invalid={!!error}
-          />
+          <input {...comunes} type={campo.inputType || 'text'} />
         )}
+        {mensaje}
       </div>
     )
   }
@@ -49,6 +52,7 @@ export default function Campo({ campo, valor, onChange, error }) {
   if (tipo === 'opciones') {
     const { opciones, modo, variante, max } = campo
     const seleccion = valor
+    const idEtiqueta = `${name}-etiqueta`
 
     function estaActiva(opcion) {
       return modo === 'multi' ? Array.isArray(seleccion) && seleccion.includes(opcion) : seleccion === opcion
@@ -68,15 +72,11 @@ export default function Campo({ campo, valor, onChange, error }) {
       }
     }
 
-    const claseContenedor =
-      variante === 'pildora'
-        ? 'flex flex-wrap gap-2'
-        : variante === 'cuadrado'
-          ? 'grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-2'
-          : 'flex flex-col gap-2'
+    const claseGrupo =
+      variante === 'cuadrado' ? 'fm-grupo tarj' : variante === 'circulo' ? 'fm-grupo lista-r' : 'fm-grupo'
 
-    const listaOpciones = (
-      <div className={claseContenedor}>
+    const grupo = (
+      <div className={claseGrupo} role="group" aria-labelledby={idEtiqueta}>
         {opciones.map((opcion) => (
           <Opcion
             key={opcion}
@@ -89,25 +89,25 @@ export default function Campo({ campo, valor, onChange, error }) {
       </div>
     )
 
+    // Presupuesto: va en un recuadro aparte, con su aclaración (`nota`).
     if (campo.destacado) {
       return (
-        <div className="flex flex-col gap-3 rounded-sm border-2 border-mg-naranja bg-mg-naranja-fondo px-5.5 py-5">
-          <div>
-            <label className="font-texto text-[15px] font-semibold text-mg-marron">{label}</label>
-            {ayuda && <div className="text-[13px] leading-[1.45] text-mg-naranja-texto">{ayuda}</div>}
+        <div className="fm-dest">
+          <div className="fm-lb" id={idEtiqueta}>
+            {label}
           </div>
-          {listaOpciones}
+          {campo.nota && <p>{campo.nota}</p>}
+          {grupo}
         </div>
       )
     }
 
     return (
-      <div className="flex flex-col gap-2.5">
-        <label className="font-texto text-[15px] font-semibold text-mg-marron">
+      <div className="fm-cp">
+        <div className="fm-lb" id={idEtiqueta}>
           {label}
-          {ayuda && <span className="font-normal text-mg-marron-tenue"> — {ayuda}</span>}
-        </label>
-        {listaOpciones}
+        </div>
+        {grupo}
       </div>
     )
   }
